@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bambu Casas · Coleção de casas em Belém</title>
+<meta name="description" content="Casa própria construída do zero e financiada pela Caixa. Conheça a Casa Ipê 85 e a Casa Jatobá 135, com passeio virtual 360°.">
+<meta name="theme-color" content="#1B1D1A">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Hanken+Grotesk:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="lib/pannellum.css">
+<style>
+:root{
+  --paper:#F4F4F0; --mist:#E7E8E3; --mist2:#DCDED7; --stone:#9A9D95; --line:#D3D5CE;
+  --ink:#141613; --graphite:#1B1D1A; --soft:#555851; --neon:#B6FF1A;
+  --serif:'Newsreader', Georgia, serif; --sans:'Hanken Grotesk', system-ui, sans-serif; --mono:'DM Mono', ui-monospace, monospace;
+  --pad:clamp(20px,5vw,72px); --r:clamp(14px,1.6vw,24px);
+  --safe-b:env(safe-area-inset-bottom,0px); --safe-t:env(safe-area-inset-top,0px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a{color:inherit}
+h1,h2,h3{font-family:var(--serif);font-weight:300;letter-spacing:-.018em;line-height:1.05}
+h1 em,h2 em,h3 em{font-style:italic}
+h2{font-size:clamp(34px,4.6vw,64px)}
+p{color:var(--soft);line-height:1.6;font-size:clamp(15px,1.15vw,18px)}
+.lead{font-size:clamp(17px,1.4vw,21px);color:#3d403a;line-height:1.55}
+.label{font-family:var(--mono);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--soft);display:inline-flex;align-items:center;gap:10px}
+.label i{width:7px;height:7px;border-radius:50%;background:var(--neon);display:block}
+.dark{background:var(--graphite);color:#F1F2EC}
+.dark p{color:#AEB1A9}.dark .lead{color:#C9CCC3}.dark .label{color:#9EA19A}
+.wrap{max-width:1320px;margin:0 auto;padding:0 var(--pad)}
+.sec{padding:clamp(72px,10vw,140px) 0;position:relative;overflow:hidden}
+.ic{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.chip{width:44px;height:44px;border-radius:14px;background:var(--mist);display:grid;place-items:center;flex:none;color:var(--ink)}
+.chip.neon{background:var(--neon)}
+.dark .chip{background:#2a2d28;color:var(--neon)}
+.darc{position:absolute;border-radius:50%;border:1px solid #33362f;pointer-events:none}
+.darc.b{border-color:#2a2c27}
+.pill{display:inline-flex;align-items:center;gap:8px;background:rgba(244,244,240,.92);backdrop-filter:blur(6px);color:var(--ink);font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;padding:9px 14px;border-radius:99px}
+.pill i{width:6px;height:6px;border-radius:50%;background:var(--neon)}
+.btn{display:inline-flex;align-items:center;gap:10px;border-radius:99px;padding:14px 22px;font-size:15px;font-weight:500;transition:transform .25s, background .25s;white-space:nowrap;text-decoration:none}
+.btn:hover{transform:translateY(-1px)}
+.btn.neon{background:var(--neon);color:var(--ink)}
+.btn.ink{background:var(--ink);color:#F1F2EC}
+.btn.glass{background:rgba(20,22,19,.45);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.22);color:#fff}
+.btn.line{border:1px solid var(--line);color:var(--ink)}
+.dark .btn.line{border-color:#3a3d37;color:#F1F2EC}
+.btn .ic{width:18px;height:18px}
+.legal{font-size:12px;color:var(--stone);line-height:1.6}
+.brand{display:flex;align-items:center;gap:8px;font-weight:500;font-size:15px;text-decoration:none}
+.brand i{width:8px;height:8px;border-radius:50%;background:var(--neon)}
+.logo{height:34px}
+
+/* views */
+.view{display:none}
+.view.on{display:block;animation:fade .6s ease}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+/* topbar (páginas internas) */
+.top{position:fixed;left:0;right:0;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;padding:calc(14px + var(--safe-t)) var(--pad) 14px;transition:background .3s,color .3s}
+.top.solid{background:rgba(244,244,240,.9);backdrop-filter:blur(12px);color:var(--ink)}
+.top.on-dark{color:#fff}
+.top .crumbs{display:flex;gap:6px;align-items:center}
+.top .crumbs button{font-size:13px;padding:8px 14px;border-radius:99px}
+.top .crumbs .home{display:inline-flex;align-items:center;gap:6px;border:1px solid currentColor;opacity:.9}
+.top .crumbs .home .ic{width:15px;height:15px}
+.top .crumbs button.cur{background:var(--ink);color:#F1F2EC}
+.top.on-dark .crumbs button.cur{background:#fff;color:var(--ink)}
+body[data-view="inicio"] .top{display:none}
+
+/* menu global */
+.mbtn{position:fixed;right:clamp(16px,2vw,28px);bottom:calc(clamp(16px,2vw,28px) + var(--safe-b));z-index:70;width:58px;height:58px;border-radius:50%;background:var(--ink);border:1px solid #2f322c;color:var(--neon);display:grid;place-items:center;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.mbtn svg{width:22px;height:22px;stroke:currentColor;stroke-width:1.4;fill:none;transition:transform .35s}
+.menu-open .mbtn svg{transform:rotate(45deg)}
+.mpanel{position:fixed;right:clamp(16px,2vw,28px);bottom:calc(clamp(16px,2vw,28px) + 70px + var(--safe-b));z-index:69;width:min(330px,calc(100vw - 32px));background:rgba(244,244,240,.97);backdrop-filter:blur(14px);border-radius:24px;padding:22px;opacity:0;transform:translateY(12px);pointer-events:none;transition:.3s;box-shadow:0 24px 60px rgba(0,0,0,.28)}
+.menu-open .mpanel{opacity:1;transform:none;pointer-events:auto}
+.mpanel .grp{margin-bottom:14px}
+.mpanel .grp:last-child{margin-bottom:0}
+.mpanel .label{font-size:10px;margin-bottom:6px}
+.mpanel a,.mpanel button.it{display:flex;justify-content:space-between;align-items:center;width:100%;text-align:left;font-size:15px;color:var(--ink);text-decoration:none;padding:10px 0;border-bottom:1px solid var(--line)}
+.mpanel .it span{font-family:var(--mono);font-size:10px;color:var(--stone);letter-spacing:.14em;text-transform:uppercase}
+.mpanel .it.soon{color:var(--stone)}
+
+/* ---------- INÍCIO ---------- */
+#v-inicio{position:relative;height:100vh;height:100svh;min-height:600px;background:#0e0f0d;color:#fff;overflow:hidden}
+.kb{position:absolute;inset:0}
+.kb .s{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.6s ease;transform:scale(1.06)}
+.kb .s.on{opacity:1;animation:kb 9s ease-out forwards}
+@keyframes kb{from{transform:scale(1.1)}to{transform:scale(1.02)}}
+#v-inicio::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(12,13,11,.92) 0%,rgba(12,13,11,.55) 34%,rgba(12,13,11,0) 62%),linear-gradient(180deg,rgba(12,13,11,.45),transparent 22%);pointer-events:none}
+.i-top{position:absolute;left:var(--pad);right:var(--pad);top:calc(22px + var(--safe-t));display:flex;justify-content:space-between;align-items:center;z-index:3}
+.i-top .label{color:rgba(255,255,255,.75)}
+.i-main{position:absolute;left:var(--pad);right:var(--pad);bottom:calc(clamp(28px,6vh,72px) + var(--safe-b));z-index:3;max-width:900px}
+.i-main h1{font-size:clamp(36px,min(5.4vw,9vh),88px);line-height:.92;letter-spacing:-.035em}
+.i-main .sub{font-family:var(--serif);font-size:clamp(15px,min(1.3vw,2.2vh),19px);color:#E7E9E2;margin-top:14px;max-width:520px;line-height:1.35;font-weight:300}
+.doors{display:flex;gap:8px;flex-wrap:wrap;margin-top:clamp(18px,3vh,28px)}
+.door{display:inline-flex;align-items:center;gap:10px;border-radius:99px;padding:11px 16px 11px 18px;font-size:14px;font-weight:500;transition:transform .25s,background .25s,border-color .25s}
+.door:hover{transform:translateY(-2px)}
+.door .n{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;opacity:.6}
+.door svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.6;transition:transform .25s}
+.door:hover svg{transform:translateX(3px)}
+.door.a{background:rgba(20,22,19,.4);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.28);color:#fff}
+.door.a:hover{border-color:#fff}
+.door.b{background:var(--neon);color:var(--ink);border:1px solid var(--neon)}
+.i-cap{position:absolute;right:var(--pad);top:50%;z-index:3;display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+.i-cap button{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.35)}
+.i-cap button.on{background:var(--neon);height:26px;border-radius:99px}
+.i-name{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-top:22px;display:flex;align-items:center;gap:10px}
+.i-name i{width:6px;height:6px;border-radius:50%;background:var(--neon)}
+
+/* ---------- COMO ---------- */
+.hero2{min-height:92vh;display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,64px);align-items:center;padding-top:110px}
+.hero2 h1{font-size:clamp(40px,5.2vw,84px);line-height:.95;letter-spacing:-.03em}
+.hero2 h1 em{color:var(--neon)}
+.hero2 .ph{border-radius:var(--r) var(--r) var(--r) clamp(60px,10vw,160px);aspect-ratio:4/4.4;background-size:cover;background-position:center}
+.endorse{display:flex;align-items:center;gap:22px;margin-top:34px;flex-wrap:wrap}
+.endorse .k{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#7c8077;width:100%}
+.endorse img.cn{height:40px}
+.endorse .cx{background:#fff;border-radius:12px;padding:8px 12px}
+.endorse .cx img{height:34px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,64px)}
+.forms{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:44px}
+.fcard{border-radius:var(--r);padding:clamp(24px,3vw,40px);background:#fff;display:flex;flex-direction:column;gap:14px}
+.fcard.dk{background:var(--graphite);color:#F1F2EC}
+.fcard.dk p{color:#AEB1A9}
+.fcard h3{font-size:clamp(26px,2.4vw,36px)}
+.fcard ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.fcard li{display:flex;gap:12px;align-items:center;font-size:16px}
+.fcard li .ck{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:var(--mist);flex:none}
+.fcard.dk li .ck{background:var(--neon);color:var(--ink)}
+.fcard li .ck svg{width:12px;height:12px;stroke:currentColor;stroke-width:2.4;fill:none}
+.fcard .sub2{margin-top:auto;border-top:1px solid #33362f;padding-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fcard .sub2 b{display:block;font-weight:500;font-size:14px;color:#F1F2EC}
+.fcard .sub2 span{font-size:13px;color:#9EA19A}
+.vs{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:stretch;margin-top:44px}
+.vs .col{border-radius:var(--r);padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;gap:14px}
+.vs .a{background:var(--mist)}.vs .b{background:var(--graphite);color:#F1F2EC}
+.vs h3{font-size:clamp(24px,2.2vw,32px)}
+.vs .row{display:flex;gap:12px;align-items:center;font-size:16px}
+.vs .a .row{color:#4a4d47}.vs .b .row{color:#DCDED6}
+.vs .x{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;flex:none;background:var(--paper)}
+.vs .b .x{background:var(--neon);color:var(--ink)}
+.vs .x svg{width:12px;height:12px;stroke:currentColor;stroke-width:2.2;fill:none}
+.vs .mid{display:grid;place-items:center}
+.vs .mid span{width:64px;height:64px;border-radius:50%;background:var(--neon);display:grid;place-items:center;font-family:var(--serif);font-style:italic;font-size:20px;color:var(--ink)}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-top:56px;position:relative}
+.step .chip{width:60px;height:60px;border-radius:50%;border:1px solid #3a3d37}
+.step.on .chip{background:var(--neon);color:var(--ink);border-color:var(--neon)}
+.step .k{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--neon);margin-top:18px}
+.step h3{font-size:24px;margin:8px 0}
+.step p{font-size:15px}
+.steps-line{position:absolute;left:30px;right:30px;top:30px;height:1px;background:repeating-linear-gradient(90deg,#3a3d37 0 6px,transparent 6px 12px);z-index:0}
+.step{position:relative;z-index:1}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:44px}
+.tile{background:var(--mist);border-radius:var(--r);padding:22px;min-height:180px;display:flex;flex-direction:column;justify-content:space-between;gap:20px}
+.tile .chip{background:var(--paper)}
+.tile b{font-family:var(--serif);font-weight:400;font-size:21px;line-height:1.15;display:block}
+.tile small{display:block;color:var(--soft);font-size:14px;margin-top:4px}
+.tile.hl{background:var(--graphite);color:#F1F2EC}.tile.hl .chip{background:var(--neon)}.tile.hl small{color:#AEB1A9}
+.notes{display:flex;gap:28px;flex-wrap:wrap;margin-top:22px;font-size:14px;color:var(--soft)}
+.notes span{display:flex;align-items:center;gap:8px}.notes i{width:6px;height:6px;border-radius:50%;background:var(--neon)}
+.nlist .it{display:grid;grid-template-columns:64px 1fr;padding:26px 0;border-bottom:1px solid var(--line)}
+.nlist .it:first-child{border-top:1px solid var(--line)}
+.nlist .k{font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--soft);padding-top:8px}
+.nlist h3{font-size:clamp(24px,2.2vw,32px);margin-bottom:6px}
+.struct{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,64px);align-items:center}
+.struct .ph{border-radius:clamp(60px,10vw,160px) var(--r) var(--r) var(--r);aspect-ratio:4/4.3;background-size:cover;background-position:center}
+.slist{display:flex;flex-direction:column;gap:10px;margin-top:34px}
+.slist div{display:flex;gap:16px;align-items:center;background:#24271f;border-radius:16px;padding:14px 16px;font-size:17px;color:#F1F2EC}
+.why{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:44px}
+.why div{border-top:2px solid var(--ink);padding-top:20px}
+.why div:nth-child(2){border-color:var(--stone)}.why div:nth-child(3){border-color:var(--neon)}.why div:nth-child(4){border-color:var(--soft)}
+.why h3{font-size:26px;margin:14px 0 8px}
+.obras{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:12px;margin-top:44px;height:clamp(420px,46vw,640px)}
+.obras div{border-radius:var(--r);background-size:cover;background-position:center;position:relative}
+.obras div:first-child{grid-row:span 2;border-radius:var(--r) var(--r) var(--r) clamp(60px,8vw,120px)}
+.obras .pill{position:absolute;left:14px;bottom:14px}
+.team{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:44px}
+.team .p{border-radius:var(--r);aspect-ratio:4/5;background-size:cover;background-position:center top;filter:saturate(.82) contrast(1.02);transition:filter .4s}
+.team .p:hover{filter:none}
+.team b{display:block;font-family:var(--serif);font-weight:400;font-size:21px;margin-top:14px}
+.team small{display:block;color:var(--soft);font-size:14px;margin-top:2px;line-height:1.35}
+.cta{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(24px,4vw,64px);align-items:center}
+.cta h2{font-size:clamp(40px,5.4vw,84px)}
+.qrcard{background:var(--paper);border-radius:28px;padding:22px;color:var(--ink);max-width:340px;justify-self:end;width:100%;text-decoration:none;display:block}
+.qrcard svg{width:100%;height:auto;display:block;border-radius:12px}
+.qrcard .cap{display:flex;align-items:center;gap:12px;margin-top:16px}
+.qrcard .cap .chip{background:var(--neon);border-radius:50%}
+.qrcard .cap b{display:block;font-family:var(--serif);font-weight:400;font-size:21px;line-height:1.1}
+.qrcard .cap small{font-size:14px;color:var(--soft)}
+.contacts{display:flex;gap:44px;margin-top:34px;flex-wrap:wrap}
+.contacts span{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:#7c8077;margin-bottom:8px}
+.contacts b{font-weight:400;font-size:21px}
+.contacts a{text-decoration:none}
+footer{padding:28px 0 calc(110px + var(--safe-b));}
+
+/* ---------- CASAS ---------- */
+.houses{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+.hcard{text-align:left;display:flex;flex-direction:column;gap:16px}
+.hcard .ph{aspect-ratio:4/4.6;border-radius:var(--r);background-size:cover;background-position:center;position:relative;overflow:hidden;transition:transform .5s}
+.hcard:hover .ph{transform:translateY(-4px)}
+.hcard:nth-child(1) .ph{border-radius:clamp(60px,9vw,150px) var(--r) var(--r) var(--r)}
+.hcard .ph .pill{position:absolute;left:14px;bottom:14px}
+.hcard .ph .go{position:absolute;right:14px;bottom:14px;width:52px;height:52px;border-radius:50%;background:var(--neon);display:grid;place-items:center;color:var(--ink)}
+.hcard .ph .go svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.6}
+.hcard h3{font-size:clamp(30px,3vw,44px)}
+.hcard h3 sup{font-family:var(--sans);font-size:15px;color:var(--soft);margin-left:6px;vertical-align:top}
+.hcard .meta{font-size:15px;color:var(--soft);line-height:1.5}
+.hcard .price{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+.hcard.soon .ph{background:var(--mist);display:grid;place-items:center}
+.hcard.soon .ph .big{font-family:var(--serif);font-weight:300;font-size:clamp(90px,10vw,160px);color:#C9CBC4;letter-spacing:-.05em}
+
+/* ---------- CASA ---------- */
+.h-hero{position:relative;height:100vh;height:100svh;min-height:600px;color:#fff;overflow:hidden;background:#0e0f0d}
+.h-hero .bg{position:absolute;inset:0;background-size:cover;background-position:center;animation:kb 12s ease-out forwards}
+.h-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(12,13,11,.9) 0%,rgba(12,13,11,.5) 30%,rgba(12,13,11,0) 58%),linear-gradient(180deg,rgba(12,13,11,.4),transparent 20%);pointer-events:none}
+.h-hero .hin{position:absolute;left:var(--pad);right:var(--pad);bottom:calc(clamp(28px,5vw,64px) + var(--safe-b));z-index:2}
+.h-hero .k{font-family:var(--mono);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:rgba(255,255,255,.75)}
+.h-hero h1{font-size:clamp(48px,min(7.5vw,12vh),124px);line-height:.88;letter-spacing:-.035em;margin:14px 0 14px}
+.h-hero .meta{font-size:clamp(14px,1.2vw,17px);color:rgba(255,255,255,.85)}
+.h-hero .meta b{color:var(--neon);font-weight:400}
+.acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px;padding-right:76px}
+.split{display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(24px,4vw,64px);align-items:center}
+.split .ph{border-radius:var(--r);aspect-ratio:16/11;background-size:cover;background-position:center}
+.zones{display:grid;gap:clamp(18px,2.6vw,40px);margin-top:48px}
+.zone{border-top:2px solid #F1F2EC;padding-top:18px}
+.zone.i{border-color:#6e7169}.zone.g{border-color:var(--neon)}
+.zone .pct{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:#9EA19A;text-transform:uppercase}
+.zone h3{font-size:clamp(28px,3vw,40px);margin:12px 0 2px}
+.zone .tot{font-family:var(--serif);font-style:italic;font-size:19px;color:#9EA19A}
+.zone ul{list-style:none;margin-top:22px}
+.zone li{display:flex;justify-content:space-between;gap:10px;font-size:16px;color:#DCDED6;padding:12px 0;border-bottom:1px solid #2f322c}
+.zone li span{font-family:var(--mono);font-size:12px;color:#7c8077}
+.zone li.hl,.zone li.hl span{color:var(--neon)}
+.area-big{font-family:var(--serif);font-weight:300;font-size:clamp(90px,12vw,190px);line-height:.8;letter-spacing:-.05em}
+.area-big span{font-family:var(--sans);font-size:.18em;color:#9EA19A;vertical-align:top;margin-left:8px;letter-spacing:0}
+.plans .tabs{display:flex;gap:8px;margin-top:28px}
+.plans .tabs button{padding:10px 18px;border-radius:99px;border:1px solid var(--line);font-size:14px}
+.plans .tabs button.on{background:var(--ink);color:#F1F2EC;border-color:var(--ink)}
+.plans .pimg{margin-top:20px;border-radius:var(--r);background:#EDEDE9;padding:clamp(10px,2vw,28px);cursor:zoom-in}
+.plans .pimg img{width:100%;border-radius:8px}
+.inv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:44px}
+.inv .formula{display:flex;flex-direction:column;gap:10px}
+.fx{display:flex;align-items:center;gap:14px;background:var(--mist);border-radius:18px;padding:16px 18px}
+.fx b{display:block;font-weight:500;font-size:16px}
+.fx small{display:block;font-size:14px;color:var(--soft);margin-top:2px}
+.fx.dk{background:var(--graphite);color:#F1F2EC}.fx.dk small{color:#AEB1A9}
+.op{font-family:var(--serif);font-size:24px;color:var(--soft);padding-left:28px;line-height:.6}
+.pc{border-radius:var(--r);padding:28px;display:flex;flex-direction:column;border:1px solid var(--line);background:var(--paper);min-height:420px}
+.pc.full{background:var(--neon);border-color:var(--neon)}
+.pc .label{color:var(--ink)}
+.pc .for{font-family:var(--serif);font-size:22px;line-height:1.2;margin-top:16px}
+.pc .val{margin-top:auto;font-family:var(--serif);font-weight:300;line-height:.9;letter-spacing:-.03em}
+.pc .val small{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.2em;margin-bottom:8px}
+.pc .val b{font-weight:300;font-size:clamp(70px,7vw,110px)}
+.pc .val i{font-size:30px;margin-left:6px}
+.pc ul{list-style:none;margin-top:20px;border-top:1px solid rgba(20,22,19,.16);padding-top:14px;display:flex;flex-direction:column;gap:8px}
+.pc li{font-size:15px;display:flex;gap:10px;align-items:center;color:#2c2f29}
+.pc li i{width:6px;height:6px;border-radius:50%;background:var(--ink);flex:none}
+.pc:not(.full) li i{background:var(--neon)}
+.bridge{display:flex;justify-content:space-between;align-items:center;gap:24px;background:var(--graphite);color:#F1F2EC;border-radius:var(--r);padding:clamp(22px,3vw,36px);margin-top:14px;flex-wrap:wrap}
+.bridge b{font-family:var(--serif);font-weight:300;font-size:clamp(22px,2.2vw,32px)}
+.bridge p{color:#AEB1A9;margin-top:6px}
+.other{display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(24px,4vw,64px);align-items:center}
+.other .ph{aspect-ratio:4/4.4;border-radius:clamp(60px,10vw,160px) var(--r) var(--r) var(--r);background-size:cover;background-position:center}
+
+/* ---------- GALERIA ---------- */
+.ov{position:fixed;inset:0;z-index:90;background:#0b0c0a;color:#fff;opacity:0;pointer-events:none;transition:opacity .4s}
+.ov.open{opacity:1;pointer-events:auto}
+.g-sl{position:absolute;inset:0}
+.g-sl .s{position:absolute;inset:0;opacity:0;transition:opacity .7s ease}
+.g-sl .s.on{opacity:1}
+.g-sl .s .im{position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat}
+.g-sl .s.contain .im{background-repeat:no-repeat;background-position:center;background-size:contain;background-color:#EDEDE9;background-origin:content-box;padding:clamp(60px,9vh,110px) clamp(16px,4vw,60px) clamp(150px,20vh,200px)}
+.g-sl .s.on .im{animation:kb 9s ease-out forwards}
+.g-sl .s.contain.on .im{animation:none}
+.g-sl .s::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,11,9,.75),transparent 40%),linear-gradient(180deg,rgba(10,11,9,.45),transparent 20%);pointer-events:none}
+.g-sl .s.contain::after{background:linear-gradient(0deg,rgba(10,11,9,.85),transparent 26%),linear-gradient(180deg,rgba(10,11,9,.7),transparent 12%)}
+.g-cap{position:absolute;left:var(--pad);bottom:calc(96px + var(--safe-b));z-index:3;max-width:min(720px,80vw)}
+.g-cap h2{font-size:clamp(30px,4vw,58px);color:#fff;margin:14px 0 8px}
+.g-cap p{color:rgba(255,255,255,.85)}
+.ov-top{position:absolute;left:var(--pad);right:var(--pad);top:calc(18px + var(--safe-t));display:flex;justify-content:space-between;align-items:center;z-index:5;gap:12px}
+.ov-top .mid{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.75)}
+.cb{width:46px;height:46px;border-radius:50%;background:rgba(20,22,19,.5);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.18);display:grid;place-items:center;color:#fff;flex:none}
+.cb svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5}
+.cb.lbl{width:auto;padding:0 18px;border-radius:99px;font-size:14px;gap:8px;display:inline-flex;align-items:center}
+.cb.on{background:var(--neon);color:var(--ink);border-color:var(--neon)}
+.ov-bot{position:absolute;left:var(--pad);right:calc(var(--pad) + 70px);bottom:calc(22px + var(--safe-b));display:flex;justify-content:space-between;align-items:center;z-index:5;gap:10px}
+.ov-bot .g{display:flex;gap:8px;align-items:center}
+.count{font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:rgba(255,255,255,.75);padding:0 6px}
+.prog{position:absolute;left:0;bottom:0;height:3px;background:var(--neon);width:0;z-index:6}
+.prog.run{animation:prog linear forwards}
+@keyframes prog{from{width:0}to{width:100%}}
+.g-index{position:absolute;inset:0;z-index:8;background:rgba(11,12,10,.96);padding:calc(80px + var(--safe-t)) var(--pad) 40px;overflow:auto;opacity:0;pointer-events:none;transition:.3s}
+.g-index.open{opacity:1;pointer-events:auto}
+.g-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.g-grid button{text-align:left}
+.g-grid .t{aspect-ratio:16/10;border-radius:14px;background-size:cover;background-position:center;outline:2px solid transparent;transition:outline .2s}
+.g-grid button.cur .t{outline-color:var(--neon)}
+.g-grid small{display:block;font-size:13px;color:#C9CCC3;margin-top:8px}
+.g-grid .ch{grid-column:1/-1;font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:#7c8077;margin-top:14px}
+
+/* ---------- TOUR ---------- */
+#pano{position:absolute;inset:0}
+.t-shade{position:absolute;left:0;right:0;pointer-events:none;z-index:2}
+.t-shade.t{top:0;height:160px;background:linear-gradient(180deg,rgba(10,11,9,.55),transparent)}
+.t-shade.b{bottom:0;height:200px;background:linear-gradient(0deg,rgba(10,11,9,.6),transparent)}
+.t-title{position:absolute;left:var(--pad);bottom:calc(92px + var(--safe-b));z-index:4;pointer-events:none}
+.t-title h2{font-size:clamp(28px,3.4vw,48px);color:#fff;margin-top:10px}
+.drawer{position:absolute;left:0;right:0;bottom:0;z-index:7;background:rgba(14,15,13,.92);backdrop-filter:blur(14px);padding:20px var(--pad) calc(96px + var(--safe-b));transform:translateY(100%);transition:transform .4s}
+.drawer.open{transform:none}
+.strip{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none}
+.strip button{flex:0 0 auto;width:200px;text-align:left}
+.strip .t{aspect-ratio:16/9;border-radius:14px;background-size:cover;background-position:center;outline:2px solid transparent}
+.strip button.cur .t{outline-color:var(--neon)}
+.strip small{display:block;font-size:13px;color:#C9CCC3;margin-top:8px}
+.map{position:absolute;right:var(--pad);top:calc(80px + var(--safe-t));z-index:6;width:min(400px,calc(100vw - 2*var(--pad)));touch-action:none;background:rgba(244,244,240,.96);border-radius:22px;padding:14px;color:var(--ink);box-shadow:0 20px 50px rgba(0,0,0,.35);opacity:0;transform:translateY(-8px) scale(.98);transform-origin:top right;pointer-events:none;transition:.3s}
+.map.open{opacity:1;transform:none;pointer-events:auto}
+.map .hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;padding:2px 4px;cursor:grab;user-select:none;gap:8px}
+.map.drag{transition:none;cursor:grabbing}.map.drag .hd{cursor:grabbing}
+.map .grip{display:inline-grid;grid-template-columns:repeat(3,3px);gap:3px;margin-right:4px;opacity:.45}.map .grip i{width:3px;height:3px;border-radius:50%;background:var(--ink)}
+.map .mx{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--mist)}.map .mx svg{width:12px;height:12px;stroke:var(--ink);stroke-width:2;fill:none}
+.map .hd .label{font-size:10px}
+.map .fl{display:flex;gap:6px}
+.map .fl button{font-size:12px;padding:6px 12px;border-radius:99px;border:1px solid var(--line)}
+.map .fl button.on{background:var(--ink);color:#F1F2EC;border-color:var(--ink)}
+.map .box{position:relative;border-radius:12px;background:#EDEDE9}
+.map .box img{border-radius:12px}
+.map .dot.l span{left:-4px;transform:none}.map .dot.r span{left:auto;right:-4px;transform:none}
+.map .box img{width:100%;display:block}
+.map .dot{position:absolute;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;background:var(--ink);border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.35);transition:transform .2s}
+.map .dot:hover{transform:scale(1.25)}
+.map .dot.cur{background:var(--neon)}
+.map .dot.cur::after{content:"";position:absolute;inset:-9px;border-radius:50%;border:2px solid var(--neon);animation:pulse 1.6s ease-out infinite}
+@keyframes pulse{from{transform:scale(.6);opacity:1}to{transform:scale(1.5);opacity:0}}
+.map .dot span{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);background:var(--ink);color:#fff;font-size:11px;padding:4px 8px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:.2s}
+.map .dot:hover span,.map .dot.cur span{opacity:1}
+.map .ft{font-size:12px;color:var(--soft);margin-top:10px;padding:0 4px}
+.loader{position:absolute;inset:0;z-index:3;display:grid;place-items:center;pointer-events:none;opacity:0;transition:opacity .3s}
+.loader.on{opacity:1}
+.loader i{width:46px;height:46px;border-radius:50%;border:2px solid rgba(255,255,255,.2);border-top-color:var(--neon);animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.pnlm-load-box,.pnlm-about-msg{display:none!important}
+
+.hs-wrap{width:0;height:0}
+.hs{position:absolute;width:0;height:0;cursor:pointer}
+.hs .hdot{position:absolute;left:-23px;top:-23px;width:46px;height:46px;border-radius:50%;background:rgba(20,22,19,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1.5px solid rgba(255,255,255,.85);display:grid;place-items:center;transition:transform .25s,background .25s}
+.hs .hdot svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.hs .hdot::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:1.5px solid var(--neon);animation:pulse 2.2s ease-out infinite}
+.hs:hover .hdot{transform:scale(1.12);background:var(--neon);border-color:var(--neon)}
+.hs:hover .hdot svg{stroke:var(--ink)}
+.hs .hlbl{position:absolute;left:50%;top:32px;transform:translateX(-50%);white-space:nowrap;background:rgba(244,244,240,.95);color:var(--ink);font-family:var(--sans);font-size:13px;font-weight:500;padding:6px 12px;border-radius:99px;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+/* lightbox planta */
+.lb{position:fixed;inset:0;z-index:95;background:rgba(11,12,10,.94);display:grid;place-items:center;padding:24px;opacity:0;pointer-events:none;transition:.3s}
+.lb.open{opacity:1;pointer-events:auto}
+.lb img{max-height:88vh;border-radius:14px}
+.lb .cb{position:absolute;right:20px;top:calc(20px + var(--safe-t))}
+.toast{position:fixed;left:50%;bottom:calc(100px + var(--safe-b));transform:translate(-50%,20px);background:var(--ink);color:#fff;padding:12px 18px;border-radius:99px;font-size:14px;z-index:120;opacity:0;transition:.3s;pointer-events:none}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+
+
+/* ---------- VALORES ---------- */
+#val{background:rgba(11,12,10,.55);backdrop-filter:blur(6px);color:var(--ink);z-index:110;display:flex;align-items:flex-end;justify-content:center}
+#val .sheet{background:var(--paper);width:min(1180px,100%);max-height:calc(100% - 24px);overflow:auto;border-radius:28px 28px 0 0;padding:clamp(22px,3.4vw,44px) clamp(18px,3.4vw,44px) calc(28px + var(--safe-b));transform:translateY(40px);transition:transform .6s var(--ease)}
+#val.open .sheet{transform:none}
+#val .vh{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+#val .vh h2{font-size:clamp(30px,3.6vw,52px);margin-top:12px}
+#val .vh .cb{background:var(--mist);color:var(--ink);border:0}
+#val .vgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:26px}
+#val .pc{min-height:330px}
+#val .vcta{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;margin-top:12px;background:var(--graphite);color:#F1F2EC;border-radius:var(--r);padding:clamp(16px,2.4vw,26px)}
+#val .vcta .qr{width:150px;background:#fff;border-radius:16px;padding:10px;display:block}
+#val .vcta .qr svg{width:100%;height:auto;display:block}
+#val .vcta b{font-family:var(--serif);font-weight:300;font-size:clamp(24px,2.4vw,34px);display:block;line-height:1.1}
+#val .vcta p{color:#AEB1A9;margin:8px 0 16px}
+#val .legal{margin-top:14px}
+@media (max-width:900px){ #val .vgrid{grid-template-columns:1fr} #val .pc{min-height:260px} #val .vcta{grid-template-columns:1fr} #val .vcta .qr{width:130px} }
+
+
+/* ---------- CASAS (índice editorial) ---------- */
+.cx-wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(24px,4vw,72px);padding:clamp(110px,14vh,150px) var(--pad) 40px;max-width:1500px;margin:0 auto}
+.cx-head h2{font-size:clamp(40px,4.6vw,72px)}
+.cx-head .lead{margin-top:16px;max-width:520px}
+.who{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:26px}
+.who .wk{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--soft);margin-right:6px}
+.who button{font-size:14px;padding:9px 15px;border-radius:99px;border:1px solid var(--line);transition:background .3s,border-color .3s,color .3s}
+.who button:hover{border-color:var(--ink)}
+.who button.on{background:var(--ink);color:#F1F2EC;border-color:var(--ink)}
+.cx-list{list-style:none;margin-top:clamp(28px,5vh,52px);counter-reset:none}
+.cx-row{position:relative;display:grid;grid-template-columns:44px 1fr auto;align-items:baseline;gap:6px 18px;padding:clamp(16px,2.4vh,26px) 0;border-top:1px solid var(--line);cursor:pointer;transition:opacity .45s var(--ease)}
+.cx-row:last-child{border-bottom:1px solid var(--line)}
+.cx-list.dim .cx-row:not(.hot){opacity:.32}
+.cx-row .n{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--stone);align-self:center}
+.cx-row .nm{font-family:var(--serif);font-weight:300;font-size:clamp(46px,6.2vw,100px);line-height:.95;letter-spacing:-.035em;display:inline-flex;align-items:center;gap:10px;position:relative;transition:transform .6s var(--ease)}
+.cx-row .nm i{position:absolute;left:-26px;top:50%;margin-top:-7px;width:14px;height:14px;border-radius:50%;background:var(--neon);transform:scale(0);transition:transform .45s var(--ease);flex:none}
+.cx-row .nm sup{font-family:var(--sans);font-size:clamp(13px,1vw,16px);letter-spacing:0;color:var(--soft);font-weight:400;align-self:flex-start;margin-top:.6em}
+.cx-row:hover .nm,.cx-row.hot .nm{transform:translateX(30px)}
+.cx-row:hover .nm i,.cx-row.hot .nm i{transform:scale(1)}
+.cx-row .pr{font-family:var(--serif);font-size:clamp(18px,1.6vw,24px);text-align:right;white-space:nowrap;align-self:center}
+.cx-row .pr small{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--stone)}
+.cx-row .tags{grid-column:2/4;display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;color:var(--soft)}
+.cx-row .tags span+span::before{content:"·";margin-right:14px;color:var(--stone)}
+.cx-row.soon .nm{color:#B9BCB3}
+.cx-row .mimg{display:none}
+.cx-right{position:relative}
+.cx-stage{position:sticky;top:96px;height:calc(100vh - 140px);min-height:480px;border-radius:clamp(80px,12vw,200px) var(--r) var(--r) var(--r);overflow:hidden;background:#0e0f0d}
+.cx-stage .ci{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transform:scale(1.08);transition:opacity .9s var(--ease),transform 1.6s var(--ease)}
+.cx-stage .ci.on{opacity:1;transform:scale(1)}
+.cx-stage::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,11,9,.55),transparent 38%);pointer-events:none}
+.cx-cap{position:absolute;left:24px;right:24px;bottom:22px;z-index:2;color:#fff;display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
+.cx-cap b{font-family:var(--serif);font-weight:300;font-size:clamp(24px,2.2vw,34px);display:block}
+.cx-cap small{font-size:14px;opacity:.85}
+.cx-cap .go{width:56px;height:56px;border-radius:50%;background:var(--neon);color:var(--ink);display:grid;place-items:center;flex:none}
+.cx-cap .go svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.6}
+.cx-cur{position:fixed;left:0;top:0;z-index:60;pointer-events:none;background:var(--ink);color:#F1F2EC;font-size:13px;font-weight:500;padding:10px 16px;border-radius:99px;opacity:0;transform:translate(-50%,-50%) scale(.6);transition:opacity .25s,transform .25s var(--ease)}
+.cx-cur.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
+@media (max-width:900px){
+  .cx-wrap{grid-template-columns:1fr;padding-top:100px}
+  .cx-right{display:none}
+  .cx-row{grid-template-columns:30px 1fr auto}
+  .cx-row .mimg{display:block;grid-column:1/4;aspect-ratio:16/10;border-radius:18px;background-size:cover;background-position:center;margin-bottom:12px}
+  .cx-row:first-child .mimg{border-radius:60px 18px 18px 18px}
+  .cx-list.dim .cx-row:not(.hot){opacity:.4}
+  .cx-cur{display:none}
+}
+
+/* ================= MOTION ================= */
+:root{--ease:cubic-bezier(.22,.8,.18,1);--ease2:cubic-bezier(.7,0,.2,1)}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform 1s var(--ease);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+.rv-img{clip-path:inset(0 0 100% 0);transition:clip-path 1.25s var(--ease2);transition-delay:var(--d,0s)}
+.rv-img.in{clip-path:inset(0 0 0 0)}
+.sw{display:inline-block!important;width:auto!important;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
+.sw>span{display:inline-block;transform:translateY(105%);transition:transform 1s var(--ease);transition-delay:calc(var(--d,0s) + var(--i,0) * 55ms)}
+.spl.in .sw>span{transform:none}
+.zone,.why div{border-top-color:transparent!important;position:relative}
+.zone::before,.why div::before{content:"";position:absolute;left:0;right:0;top:-2px;height:2px;background:var(--zc,#F1F2EC);transform:scaleX(0);transform-origin:left;transition:transform 1.2s var(--ease2);transition-delay:var(--d,0s)}
+.zone.i{--zc:#6e7169}.zone.g{--zc:var(--neon)}
+.why div:nth-child(1){--zc:var(--ink)}.why div:nth-child(2){--zc:var(--stone)}.why div:nth-child(3){--zc:var(--neon)}.why div:nth-child(4){--zc:var(--soft)}
+.zone.in::before,.why div.in::before{transform:scaleX(1)}
+.steps-line{transform:scaleX(0);transform-origin:left;transition:transform 1.8s var(--ease2) .2s}
+.steps.in .steps-line{transform:scaleX(1)}
+.step .chip{transform:scale(.4);opacity:0;transition:transform .7s var(--ease),opacity .5s;transition-delay:var(--d,0s)}
+.step.in .chip{transform:none;opacity:1}
+#curtain{position:fixed;inset:0;z-index:200;pointer-events:none;background:var(--graphite);transform:scaleY(0);transform-origin:bottom}
+#curtain::after{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--neon)}
+#curtain.cover{transform:scaleY(1);transition:transform .55s var(--ease2)}
+#curtain.reveal{transform:scaleY(0);transform-origin:top;transition:transform .7s var(--ease2)}
+#curtain .cw{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:var(--serif);font-weight:300;font-size:clamp(28px,4vw,56px);color:#F1F2EC;opacity:0;transition:opacity .3s}
+#curtain.cover .cw{opacity:1;transition-delay:.25s}
+#prog{position:fixed;left:0;top:0;height:2px;background:var(--neon);z-index:80;width:0;pointer-events:none}
+body[data-view="inicio"] #prog{display:none}
+.kbbar{position:absolute;left:0;bottom:0;height:3px;background:var(--neon);z-index:4;width:0}
+.kbbar.run{animation:prog linear forwards}
+body.intro .i-top,body.intro .i-main .sub,body.intro .doors,body.intro .i-name,body.intro .i-cap{opacity:0;transform:translateY(16px)}
+.i-top,.i-main .sub,.doors,.i-name,.i-cap{transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.i-main .sub{transition-delay:.55s}.doors{transition-delay:.75s}.i-name{transition-delay:.95s}.i-top{transition-delay:.2s}.i-cap{transition-delay:1s}
+.marq{overflow:hidden;white-space:nowrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0;margin-top:48px}
+.marq .tr{display:inline-flex;gap:48px;animation:marq 38s linear infinite;padding-right:48px}
+.marq span{font-family:var(--serif);font-weight:300;font-size:clamp(28px,3.4vw,52px);letter-spacing:-.02em;color:var(--ink);display:inline-flex;align-items:center;gap:48px}
+.marq span em{font-style:italic;color:var(--soft)}
+.marq span::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--neon)}
+@keyframes marq{to{transform:translateX(-50%)}}
+.hcard .ph{transition:transform .8s var(--ease),box-shadow .8s var(--ease)}
+.hcard:hover .ph{transform:translateY(-6px);box-shadow:0 30px 60px -30px rgba(0,0,0,.45)}
+.hs .hdot,.hs .hlbl{animation:hsIn .7s var(--ease) backwards}
+.hs .hlbl{animation-delay:.12s}
+@keyframes hsIn{from{opacity:0;scale:.4}to{opacity:1;scale:1}}
+.g-cap>*{opacity:0;transform:translateY(18px);animation:capIn .9s var(--ease) forwards}
+.g-cap>*:nth-child(2){animation-delay:.12s}.g-cap>*:nth-child(3){animation-delay:.24s}
+@keyframes capIn{to{opacity:1;transform:none}}
+.t-title>*{animation:capIn .8s var(--ease) both}
+.mag{transition:transform .35s var(--ease)}
+@media (prefers-reduced-motion:reduce){
+  .rv,.rv-img,.sw>span,.zone::before,.why div::before,.steps-line,.step .chip{transition:none!important;opacity:1!important;transform:none!important;clip-path:none!important}
+  .marq .tr,.kb .s.on,.h-hero .bg{animation:none!important}
+  #curtain{display:none}
+}
+
+/* ---------- responsivo ---------- */
+@media (max-width:900px){
+  .ov-top .mid{display:none}
+  .i-main{bottom:calc(92px + var(--safe-b))}
+  .doors{flex-direction:column}
+  .door{width:100%;justify-content:space-between;padding:15px 18px}
+  .door .t{flex:1;text-align:left}
+  .i-cap{display:none}
+  .hero2,.two,.struct,.cta,.split,.other{grid-template-columns:1fr}
+  .forms,.vs{grid-template-columns:1fr}
+  .vs .mid{display:none}
+  .steps{grid-template-columns:1fr;gap:26px}.steps-line{display:none}
+  .step{display:grid;grid-template-columns:60px 1fr;column-gap:18px}.step .k{margin-top:0;grid-column:2}.step .chip{grid-row:span 3}
+  .tiles{grid-template-columns:1fr 1fr}
+  .why{grid-template-columns:1fr 1fr}
+  .obras{grid-template-columns:1fr 1fr;grid-template-rows:none;height:auto}
+  .obras div{aspect-ratio:1}.obras div:first-child{grid-column:span 2;grid-row:auto;aspect-ratio:4/3}
+  .team{grid-template-columns:repeat(2,1fr)}
+  .houses{grid-template-columns:1fr}
+  .inv{grid-template-columns:1fr}
+  .pc{min-height:320px}
+  .acts{padding-right:0;padding-bottom:70px}
+  .qrcard{justify-self:start}
+  .zones{grid-template-columns:1fr!important}
+  .ov-bot{right:var(--pad)}
+  .g-cap{bottom:calc(150px + var(--safe-b))}
+  .ov-bot{flex-wrap:wrap}
+  .map{width:min(280px,76vw);padding:10px;border-radius:18px;top:calc(72px + var(--safe-t));bottom:auto}
+  .map .hd{margin-bottom:6px}.map .hd .label{font-size:9px;letter-spacing:.2em}.map .fl button{font-size:11px;padding:4px 9px}
+  .map .dot{width:14px;height:14px;margin:-7px 0 0 -7px;border-width:2px}
+  .map .ft{display:none}
+  .top .crumbs button:not(.home){display:none}
+  .i-top .label{display:none}
+}
+</style>
+</head>
+<body data-view="inicio" class="intro">
+
+<!-- topo das páginas internas -->
+<header class="top" id="top">
+  <a class="brand" href="#inicio"><i></i>bambu casas</a>
+  <nav class="crumbs">
+    <button class="home" data-go="inicio">{{IC:home}}Início</button>
+    <button data-go="como">Como consigo ter uma casa?</button>
+    <button data-go="casas">Qual é a minha casa?</button>
+  </nav>
+</header>
+
+<!-- ===================== INÍCIO ===================== -->
+<section class="view" id="v-inicio">
+  <div class="kb" id="kb"></div><div class="kbbar" id="kbbar"></div>
+  <div class="i-top">
+    <img class="logo" src="inst/logo-bambu-casas.png" alt="Bambu Casas">
+    <span class="label">Coleção Bambu Casas · Belém</span>
+  </div>
+  <div class="i-cap" id="kbDots"></div>
+  <div class="i-main">
+    <h1>Casa própria,<br><em>construída do zero.</em></h1>
+    <p class="sub">Projetos prontos, entrada facilitada e financiamento Caixa. A gente guia você do primeiro passo às chaves.</p>
+    <div class="doors">
+      <button class="door a" data-go="como"><span class="n">01</span><span class="t">Como consigo ter uma casa?</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      <button class="door b" data-go="casas"><span class="n">02</span><span class="t">Qual é a minha casa?</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    </div>
+    <div class="i-name" id="kbName"><i></i><span></span></div>
+  </div>
+</section>
+
+<!-- ===================== COMO CONSIGO ===================== -->
+<section class="view" id="v-como">
+  <div class="dark" style="position:relative;overflow:hidden">
+    <div class="darc" style="left:-14vw;bottom:-30vw;width:56vw;height:56vw"></div><div class="darc b" style="left:-6vw;bottom:-36vw;width:56vw;height:56vw"></div>
+    <div class="wrap hero2">
+      <div style="position:relative">
+        <span class="label"><i></i>Como consigo ter uma casa?</span>
+        <h1 style="margin-top:22px">Construímos casas.<br><em>Viabilizamos conquistas.</em></h1>
+        <p class="lead" style="margin-top:24px;max-width:520px">Do primeiro estudo à entrega das chaves, com recursos próprios ou financiamento Caixa. Arquitetura, engenharia e financiamento em um só lugar.</p>
+        <div class="endorse"><span class="k">Uma empresa do</span><img class="cn" src="inst/logo-casa-norte.png" alt="Grupo Casa Norte Engenharia"><span class="cx"><img src="inst/logo-caixa.png" alt="Financiamento Caixa"></span></div>
+      </div>
+      <div class="ph" style="background-image:url(img/jatoba-fachada-lateral.jpg);background-position:58% center"></div>
+    </div>
+  </div>
+
+  <div class="sec"><div class="wrap">
+    <h2 style="max-width:900px">Você não precisa esperar um imóvel pronto para ter <em>a sua casa.</em></h2>
+    <div class="two" style="margin-top:40px;max-width:900px">
+      <p class="lead">Muita gente acha que casa nova só existe em lançamento ou em anúncio de imóvel pronto. Dá para construir a sua, com projeto pensado, entrada facilitada e o restante financiado pela Caixa.</p>
+      <p class="lead">A Bambu Casas tem projetos prontos, orçamento definido e uma equipe que guia você em cada etapa, do primeiro contato até as chaves.</p>
+    </div>
+  </div></div>
+
+  <div class="sec" style="background:var(--mist)"><div class="wrap">
+    <span class="label"><i></i>Duas formas de construir</span>
+    <h2 style="margin-top:18px">Com o seu dinheiro <em>ou com a Caixa.</em></h2>
+    <div class="forms">
+      <div class="fcard">
+        <div class="chip">{{IC:wallet}}</div>
+        <span class="label">Opção 01</span>
+        <h3>Recursos próprios</h3>
+        <p>Você investe com o seu capital e a obra segue o ritmo do seu planejamento.</p>
+        <ul><li><span class="ck">{{CK}}</span>Sem análise de crédito bancário</li><li><span class="ck">{{CK}}</span>Mais flexibilidade nos pagamentos</li><li><span class="ck">{{CK}}</span>Contratação mais rápida</li></ul>
+      </div>
+      <div class="fcard dk">
+        <div class="chip">{{IC:bank}}</div>
+        <span class="label">Opção 02</span>
+        <h3>Financiamento Caixa</h3>
+        <p>A Caixa financia a construção e libera os recursos conforme a evolução da obra.</p>
+        <ul><li><span class="ck">{{CK}}</span>Até 35 anos para pagar</li><li><span class="ck">{{CK}}</span>Possibilidade de usar o FGTS</li><li><span class="ck">{{CK}}</span>Entrada facilitada com a construtora</li></ul>
+        <div class="sub2"><div><b>Já tem terreno?</b><span>Construção em terreno próprio. O lote pode compor a entrada.</span></div><div><b>Ainda não tem?</b><span>Aquisição de terreno e construção no mesmo contrato.</span></div></div>
+      </div>
+    </div>
+    <p class="legal" style="margin-top:16px">Condições sujeitas à análise de crédito e às regras vigentes da Caixa Econômica Federal.</p>
+  </div></div>
+
+  <div class="sec"><div class="wrap">
+    <span class="label"><i></i>Aluguel ou casa própria</span>
+    <h2 style="margin-top:18px;max-width:900px">Troque o aluguel pela <em>parcela da casa própria.</em></h2>
+    <div class="vs">
+      <div class="col a"><span class="label">Aluguel</span><h3>Dinheiro que não volta</h3>
+        <div class="row"><span class="x">{{XX}}</span>Apartamento antigo, sem quintal e sem espaço</div>
+        <div class="row"><span class="x">{{XX}}</span>Reajuste todo ano, sem controle</div>
+        <div class="row"><span class="x">{{XX}}</span>Todo mês você paga e nada fica para você</div></div>
+      <div class="mid"><span>ou</span></div>
+      <div class="col b"><span class="label">Casa própria</span><h3>A sua casa, do seu jeito</h3>
+        <div class="row"><span class="x">{{CK}}</span>Casa nova com quintal e área gourmet</div>
+        <div class="row"><span class="x">{{CK}}</span>Segurança em bairro planejado</div>
+        <div class="row"><span class="x">{{CK}}</span>Cada pagamento vira patrimônio seu</div></div>
+    </div>
+    <p class="legal" style="margin-top:16px">A simulação é gratuita. A parcela depende de renda, entrada, prazo e da análise de crédito da Caixa.</p>
+  </div></div>
+
+  <div class="sec dark"><div class="darc" style="right:-16vw;top:-22vw;width:56vw;height:56vw"></div><div class="darc b" style="right:-24vw;top:-14vw;width:56vw;height:56vw"></div><div class="wrap" style="position:relative">
+    <span class="label"><i></i>Passo a passo</span>
+    <h2 style="margin-top:18px;max-width:900px">A gente guia você <em>do primeiro passo às chaves.</em></h2>
+    <p class="lead" style="margin-top:18px;max-width:620px">Você não precisa entender de financiamento nem de obra. A Bambu Casas acompanha cada etapa ao seu lado.</p>
+    <div class="steps"><div class="steps-line"></div>
+      <div class="step on"><div class="chip">{{IC:calc}}</div><div class="k">01</div><h3>Simulação de crédito</h3><p>Entendemos sua renda e quanto a Caixa pode financiar.</p></div>
+      <div class="step"><div class="chip">{{IC:hand}}</div><div class="k">02</div><h3>Entrada facilitada</h3><p>Combinamos com você a melhor forma de pagar a entrada.</p></div>
+      <div class="step"><div class="chip">{{IC:doc}}</div><div class="k">03</div><h3>Terreno e aprovação</h3><p>Seu lote ou um novo. Cuidamos da documentação e da análise da Caixa.</p></div>
+      <div class="step"><div class="chip">{{IC:helmet}}</div><div class="k">04</div><h3>Obra</h3><p>De 5 a 9 meses, conforme o projeto, com relatório semanal.</p></div>
+      <div class="step"><div class="chip">{{IC:key}}</div><div class="k">05</div><h3>Chaves na mão</h3><p>Casa pronta, vistoriada e entregue.</p></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="wrap">
+    <span class="label"><i></i>Padrão de acabamento</span>
+    <h2 style="margin-top:18px">Qualidade em <em>cada detalhe.</em></h2>
+    <div class="tiles">
+      <div class="tile"><div class="chip">{{IC:forro}}</div><div><b>Forro em gesso acartonado</b><small>Em toda a casa</small></div></div>
+      <div class="tile"><div class="chip">{{IC:piso}}</div><div><b>Porcelanato acetinado</b><small>No piso de todos os ambientes</small></div></div>
+      <div class="tile"><div class="chip">{{IC:azul}}</div><div><b>Cerâmica até o teto</b><small>Nas áreas molhadas</small></div></div>
+      <div class="tile hl"><div class="chip">{{IC:bulb}}</div><div><b>Iluminação em LED</b><small>Em toda a casa, com perfis na fachada</small></div></div>
+      <div class="tile"><div class="chip">{{IC:door}}</div><div><b>Portas em MDF ou vidro</b><small>Conforme o ambiente</small></div></div>
+      <div class="tile"><div class="chip">{{IC:bancada}}</div><div><b>Bancadas em granito</b><small>Cozinha e banheiros</small></div></div>
+      <div class="tile"><div class="chip">{{IC:nicho}}</div><div><b>Nichos embutidos</b><small>Nos banheiros</small></div></div>
+      <div class="tile"><div class="chip">{{IC:snow}}</div><div><b>Infra para ar-condicionado</b><small>Já entregue</small></div></div>
+    </div>
+    <div class="notes"><span><i></i>Memorial descritivo completo entregue em anexo ao contrato.</span><span><i></i>Móveis, eletrodomésticos e decoração das imagens não estão inclusos.</span></div>
+  </div></div>
+
+  <div class="sec" style="background:var(--mist)"><div class="wrap two" style="align-items:center">
+    <div><span class="label"><i></i>Localização</span><h2 style="margin-top:18px">Bougainville, <em>Belém do Pará.</em></h2><p class="lead" style="margin-top:20px">Morar em um bairro planejado, perto de um dos principais eixos da cidade, com a tranquilidade que a família procura.</p><p class="legal" style="margin-top:24px;font-family:var(--mono);letter-spacing:.16em;text-transform:uppercase">Bougainville · Av. Augusto Montenegro · Belém/PA</p></div>
+    <div class="nlist">
+      <div class="it"><span class="k">01</span><div><h3>Bairro planejado</h3><p>Loteamento em condomínio aberto, pensado para morar.</p></div></div>
+      <div class="it"><span class="k">02</span><div><h3>Perto da Augusto Montenegro</h3><p>Acesso rápido a um dos principais eixos de Belém.</p></div></div>
+      <div class="it"><span class="k">03</span><div><h3>Segurança e tranquilidade</h3><p>Ruas novas, vizinhança residencial e espaço para as crianças.</p></div></div>
+    </div>
+  </div></div>
+
+  <div class="sec dark"><div class="wrap struct">
+    <div><span class="label"><i></i>Quem somos</span><h2 style="margin-top:18px">Estruturados para fazer a sua obra <em>do jeito certo.</em></h2>
+      <p class="lead" style="margin-top:20px">Construtora com foco em financiamento imobiliário e execução de casas residenciais.</p>
+      <div class="slist"><div><span class="chip">{{IC:compass}}</span>Arquitetura e interiores</div><div><span class="chip">{{IC:helmet}}</span>Engenharia e execução</div><div><span class="chip">{{IC:calc}}</span>Orçamento e planejamento</div><div><span class="chip">{{IC:doc}}</span>Financiamento e documentação</div></div></div>
+    <div class="ph" style="background-image:url(inst/estrutura.jpg)"></div>
+  </div></div>
+
+  <div class="sec"><div class="wrap">
+    <span class="label"><i></i>Por que a Bambu Casas</span>
+    <h2 style="margin-top:18px">Sua obra em <em>boas mãos.</em></h2>
+    <div class="why">
+      <div><h3>Tudo em um só lugar</h3><p>Projeto, obra, documentação e financiamento com um único time.</p></div>
+      <div><h3>Custos e prazos claros</h3><p>Orçamento aberto por etapa, sem surpresas no caminho.</p></div>
+      <div><h3>Equipe técnica</h3><p>Engenheiros e arquitetos medindo e registrando cada fase.</p></div>
+      <div><h3>Imóvel 100% regular</h3><p>Do alvará ao habite-se, cuidamos de toda a regularização.</p></div>
+    </div>
+  </div></div>
+
+  <div class="sec" style="padding-top:0"><div class="wrap">
+    <span class="label"><i></i>Projetos que ajudamos a tirar do papel</span>
+    <h2 style="margin-top:18px">Obras reais. <em>Famílias reais.</em></h2>
+    <div class="obras">
+      <div style="background-image:url(inst/obra-01.jpg)"><span class="pill"><i></i>Obra entregue</span></div>
+      <div style="background-image:url(inst/obra-02.jpg)"></div><div style="background-image:url(inst/obra-03.jpg)"></div><div style="background-image:url(inst/obra-04.jpg)"></div>
+      <div style="background-image:url(inst/obra-05.jpg)"></div><div style="background-image:url(inst/obra-06.jpg)"></div><div style="background-image:url(inst/obra-07.jpg)"></div>
+    </div>
+    <p class="legal" style="margin-top:14px">Fotos reais de obras executadas pela Bambu Casas.</p>
+  </div></div>
+
+  <div class="sec" style="background:var(--mist)"><div class="wrap">
+    <span class="label"><i></i>Nossa equipe</span>
+    <h2 style="margin-top:18px">Quem faz <em>acontecer.</em></h2>
+    <div class="team">
+      <div><div class="p" style="background-image:url(inst/equipe-elisa.jpg)"></div><b>Elisa Nunes</b><small>Operações estratégicas</small></div>
+      <div><div class="p" style="background-image:url(inst/equipe-calique.jpg)"></div><b>Calique Brito</b><small>Arquiteto chefe</small></div>
+      <div><div class="p" style="background-image:url(inst/equipe-luciana.jpg)"></div><b>Luciana Rodrigues</b><small>Gestão comercial</small></div>
+      <div><div class="p" style="background-image:url(inst/equipe-raphael.jpg)"></div><b>Raphael Reis</b><small>CEO de engenharia</small></div>
+      <div><div class="p" style="background-image:url(inst/equipe-lorena.jpg)"></div><b>Lorena Martins</b><small>Head de arquitetura e interiores</small></div>
+      <div><div class="p" style="background-image:url(inst/equipe-ricardo.jpg)"></div><b>Ricardo Lair</b><small>Criação e marketing</small></div>
+    </div>
+    <p class="lead" style="margin-top:40px">Arquitetura, engenharia, comercial e marketing <em style="font-family:var(--serif)">trabalhando juntos pela sua obra.</em></p>
+  </div></div>
+
+  <div class="sec dark"><div class="darc" style="right:-16vw;top:-22vw;width:56vw;height:56vw"></div><div class="darc b" style="right:-24vw;top:-14vw;width:56vw;height:56vw"></div><div class="wrap cta" style="position:relative">
+    <div><span class="label"><i></i>Próximo passo</span><h2 style="margin-top:18px">Agora, qual é <em>a sua casa?</em></h2>
+      <p class="lead" style="margin-top:20px;max-width:520px">Conheça os projetos prontos, passeie por dentro em 360° e simule a sua com a gente.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:30px"><button class="btn neon" data-go="casas">Ver as casas {{IC:arrow}}</button><a class="btn line" href="{{WA_GERAL}}" target="_blank" rel="noopener">Simular no WhatsApp</a></div>
+      <div class="contacts"><div><span>WhatsApp</span><b><a href="{{WA_GERAL}}" target="_blank" rel="noopener">(91) 98024-5432</a></b></div><div><span>Instagram</span><b>@bambucasas_</b></div></div>
+    </div>
+    <a class="qrcard" href="{{WA_GERAL}}" target="_blank" rel="noopener">{{QR_GERAL}}<div class="cap"><div class="chip">{{IC:chat}}</div><div><b>Aponte a câmera</b><small>e fale com a gente no WhatsApp</small></div></div></a>
+  </div></div>
+  <footer class="dark"><div class="wrap"><p class="legal">Bambu Casas · CNPJ 47.664.754/0001-00 · Uma empresa do Grupo Casa Norte Engenharia · Imagens meramente ilustrativas · Tabela válida até dezembro de 2026</p></div></footer>
+</section>
+
+<!-- ===================== CASAS ===================== -->
+<section class="view" id="v-casas">
+  <div class="cx-wrap">
+    <div class="cx-left">
+      <div class="cx-head">
+        <h2>Qual é <em>a sua casa?</em></h2>
+        <p class="lead">Três projetos prontos, cada um para um momento da família. Passe o olho, escolha e entre.</p>
+        <div class="who"><span class="wk">Para quem é?</span><button data-who="casa-ipe">Primeiro imóvel ou casal</button><button data-who="casa-jatoba">Família que quer espaço</button><button data-who="cumaru">Térrea com mais área</button></div>
+      </div>
+      <ol class="cx-list" id="cxList"></ol>
+      <p class="legal" style="margin-top:28px">Valores de construção. Com terreno no Bougainville: Ipê R$ 560 mil · Jatobá R$ 890 mil. Tabela válida até dezembro de 2026.</p>
+    </div>
+    <div class="cx-right"><div class="cx-stage" id="cxStage"><div class="cx-cap" id="cxCap"></div></div></div>
+  </div>
+  <div class="cx-cursor" id="cxCur">Ver casa</div>
+  <footer><div class="wrap"><p class="legal">Bambu Casas · CNPJ 47.664.754/0001-00 · Imagens meramente ilustrativas</p></div></footer>
+</section>
+
+<!-- ===================== CASA (Ipê / Jatobá) ===================== -->
+<section class="view" id="v-casa"></section>
+
+<!-- ===================== GALERIA ===================== -->
+<div class="ov" id="gal">
+  <div class="g-sl" id="gSl"></div>
+  <div class="ov-top"><span class="brand" style="color:#fff"><i></i><span id="gHouse">bambu casas</span></span><span class="mid" id="gChap"></span><span style="display:flex;gap:8px"><button class="cb lbl" data-home>{{IC:home}}Início</button><button class="cb" id="gClose" aria-label="Fechar">{{IC:x}}</button></span></div>
+  <div class="g-cap" id="gCap"></div>
+  <div class="ov-bot">
+    <div class="g"><button class="cb lbl" id="gIdx">{{IC:grid}}Índice</button><button class="cb lbl" id="gTour">{{IC:pano}}Ver em 360°</button><button class="cb lbl" data-val>{{IC:tag}}Quanto custa?</button></div>
+    <div class="g"><span class="count" id="gCount"></span><button class="cb" id="gPlay" aria-label="Reproduzir">{{IC:play}}</button><button class="cb" id="gPrev" aria-label="Anterior">{{IC:prev}}</button><button class="cb" id="gNext" aria-label="Próxima">{{IC:next}}</button></div>
+  </div>
+  <div class="prog" id="gProg"></div>
+  <div class="g-index" id="gIndex"><div class="ov-top" style="position:fixed"><span class="label" style="color:#9EA19A"><i></i>Índice de imagens</span><span></span><button class="cb" id="gIdxClose">{{IC:x}}</button></div><div class="g-grid" id="gGrid"></div></div>
+</div>
+
+<!-- ===================== TOUR ===================== -->
+<div class="ov" id="tour">
+  <div id="pano"></div>
+  <div class="t-shade t"></div><div class="t-shade b"></div>
+  <div class="loader" id="tLoad"><i></i></div>
+  <div class="ov-top"><span class="brand" style="color:#fff"><i></i><span id="tHouse"></span></span><span class="mid">Passeio virtual 360°</span><span style="display:flex;gap:8px"><button class="cb lbl" data-home>{{IC:home}}Início</button><button class="cb" id="tClose" aria-label="Fechar">{{IC:x}}</button></span></div>
+  <div class="t-title" id="tTitle"></div>
+  <div class="map" id="tMap"></div>
+  <div class="drawer" id="tDrawer"><div class="label" style="color:#9EA19A;margin-bottom:14px"><i></i>Ambientes</div><div class="strip" id="tStrip"></div></div>
+  <div class="ov-bot">
+    <div class="g"><button class="cb lbl" id="tAmb">{{IC:grid}}Ambientes</button><button class="cb lbl" id="tMapB">{{IC:plan}}Planta</button><button class="cb lbl" data-val>{{IC:tag}}Quanto custa?</button></div>
+    <div class="g"><button class="cb" id="tAuto" aria-label="Passeio automático">{{IC:play}}</button><button class="cb" id="tPrev" aria-label="Anterior">{{IC:prev}}</button><button class="cb" id="tNext" aria-label="Próximo">{{IC:next}}</button><button class="cb" id="tFs" aria-label="Tela cheia">{{IC:fs}}</button></div>
+  </div>
+</div>
+
+<div class="ov" id="val"><div class="sheet" id="valSheet"></div></div>
+<div class="lb" id="lb"><img alt=""><button class="cb" id="lbClose">{{IC:x}}</button></div>
+<div class="toast" id="toast"></div>
+<div id="curtain"><span class="cw" id="cw"></span></div>
+<div id="prog"></div>
+
+<!-- menu global -->
+<button class="mbtn" id="mbtn" aria-label="Menu"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+<div class="mpanel" id="mpanel">
+  <div class="grp"><span class="label"><i></i>Bambu Casas</span>
+    <button class="it" data-go="inicio">Início <span>01</span></button>
+    <button class="it" data-go="como">Como consigo ter uma casa? <span>02</span></button>
+    <button class="it" data-go="casas">Qual é a minha casa? <span>03</span></button></div>
+  <div class="grp"><span class="label"><i></i>As casas</span>
+    <button class="it" data-go="casa-ipe">Casa Ipê <span>85 m²</span></button>
+    <button class="it" data-go="casa-jatoba">Casa Jatobá <span>135 m²</span></button>
+    <button class="it" id="mVal" style="display:none">Quanto custa? <span>valores</span></button>
+    <button class="it soon" data-go="casas">Casa Cumaru <span>110 m² · em breve</span></button></div>
+  <div class="grp"><a class="it" href="{{WA_GERAL}}" target="_blank" rel="noopener">Falar no WhatsApp <span>simular</span></a></div>
+</div>
+
+<script src="lib/pannellum.js"></script>
+<script>
+const ICONS={{ICONS}};
+const QR={{QRS}};
+const WA={{WAS}};
+const ic=k=>'<svg class="ic" viewBox="0 0 24 24">'+(ICONS[k]||'')+'</svg>';
+const ARR='<svg class="ic" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+
+const HOUSES={
+ 'casa-ipe':{key:'ipe',name:'Casa Ipê',area:85,
+  k:'Coleção Bambu Casas · Belém',
+  meta:'<b>85 m²</b> · térrea · 2 quartos com suíte e closet · área gourmet · garagem · quintal',
+  hero:'img/ipe-fachada.jpg',
+  intro:{t:'Compacta na medida certa, <em>com presença de casa grande.</em>',p:'Térrea, com fachada em pedra, madeira e perfis de LED. Garagem, área gourmet com churrasqueira e quintal, tudo em um pavimento.',img:'img/ipe-fachada-garagem.jpg'},
+  zones:{cols:'25.77fr 36.69fr 22.54fr',z:[
+   {c:'',pct:'30%',h:'Viver',tot:'25,77 m²',li:[['Sala de estar','10,11'],['Sala de jantar','7,70'],['Cozinha','7,96']]},
+   {c:'i',pct:'43%',h:'Descansar',tot:'36,69 m²',li:[['Suíte master','14,13'],['Closet','6,34'],['Banho da suíte','4,63'],['Quarto 02','8,69'],['Banho social','2,90']]},
+   {c:'g',pct:'27%',h:'Receber',tot:'22,54 m²',li:[['Área gourmet','7,22',1],['Garagem','15,32']]}]},
+  zText:'Três zonas bem resolvidas, tudo em um pavimento e sem corredor sobrando.',
+  plans:[{n:'Térreo',f:'img/ipe-planta.jpg'}],
+  prices:[360,560],prazo:5,
+  pdf:'book/Book_Casa_Ipe_85_Bambu_Casas.pdf',
+  other:'casa-jatoba',
+  gallery:[
+   {f:'ipe-fachada',ch:'Arquitetura',t:'Casa Ipê',d:'Térrea, com fachada em pedra, madeira e perfis de LED.',s:'ipe-01-fachada'},
+   {f:'ipe-fachada-garagem',ch:'Arquitetura',t:'Fachada e garagem',d:'Painel em pedra, portão ripado e iluminação de fachada.',s:'ipe-01-fachada'},
+   {f:'ipe-planta',ch:'Planta',t:'Tudo no térreo',d:'Social integrado de ponta a ponta, até a área gourmet e o quintal.',c:1},
+   {f:'ipe-sala',ch:'Interiores',t:'Estar e jantar',d:'Um só ambiente, do sofá ao quintal.',s:'ipe-02-sala'},
+   {f:'ipe-cozinha',ch:'Interiores',t:'Cozinha',d:'Integrada ao jantar e aberta para o quintal.',s:'ipe-03-jantar-cozinha'},
+   {f:'ipe-gourmet',ch:'Interiores',t:'Área gourmet',d:'Churrasqueira em casa, para receber de verdade.',s:'ipe-04-quintal-gourmet'},
+   {f:'ipe-suite',ch:'Interiores',t:'Suíte master',d:'Closet, banheiro privativo e porta de vidro para o jardim.',s:'ipe-05-suite-master'},
+   {f:'ipe-quarto-02',ch:'Interiores',t:'Quarto 02',d:'Para as crianças hoje e para o que a família precisar amanhã.',s:'ipe-06-quarto-02'}],
+  floors:[{n:'Térreo',f:'img/ipe-planta.jpg'}],
+  scenes:[
+   {id:'ipe-01-fachada',t:'Fachada',fl:0,x:6,y:63,yaw:2,hfov:70,h:[['ipe-02-sala',3,-2,'Entrar na casa']]},
+   {id:'ipe-02-sala',t:'Sala de estar',fl:0,x:39.5,y:57,yaw:0,h:[['ipe-03-jantar-cozinha',0,-9,'Jantar e cozinha'],['ipe-01-fachada',150,-6,'Garagem e fachada'],['ipe-05-suite-master',-128,-6,'Suíte master']]},
+   {id:'ipe-03-jantar-cozinha',t:'Jantar e cozinha',fl:0,x:57.5,y:60,yaw:0,h:[['ipe-04-quintal-gourmet',-42,-5,'Quintal e área gourmet'],['ipe-02-sala',100,-8,'Sala de estar'],['ipe-06-quarto-02',-88,-4,'Quarto 02']]},
+   {id:'ipe-04-quintal-gourmet',t:'Quintal e área gourmet',fl:0,x:90,y:49,yaw:12,h:[['ipe-03-jantar-cozinha',14,-6,'Área gourmet e cozinha']]},
+   {id:'ipe-05-suite-master',t:'Suíte master',fl:0,x:27.4,y:28.6,yaw:0,h:[['ipe-02-sala',117,-4,'Sala de estar']]},
+   {id:'ipe-06-quarto-02',t:'Quarto 02',fl:0,x:68,y:33.3,yaw:0,h:[['ipe-03-jantar-cozinha',-67,-6,'Área social']]}
+]},
+ 'casa-jatoba':{key:'jatoba',name:'Casa Jatobá',area:135,
+  k:'Coleção Bambu Casas · Belém',
+  meta:'<b>135 m²</b> · 2 pavimentos · 3 suítes · cozinha gourmet · garagem para 2 carros · quintal',
+  hero:'img/jatoba-fachada.jpg',
+  intro:{t:'Dois pavimentos <em>para a família que quer espaço.</em>',p:'O volume da suíte master revestido em madeira, varanda em vidro e pedra na entrada. Social no térreo, aberto para o quintal; três suítes no andar de cima.',img:'img/jatoba-fachada-lateral.jpg'},
+  zones:{cols:'51.73fr 52.85fr 30.42fr',z:[
+   {c:'',pct:'38% · térreo',h:'Viver',tot:'51,73 m²',li:[['Sala de estar','14,46'],['Sala de jantar','17,41'],['Cozinha gourmet','16,58',1],['Banho social','3,28']]},
+   {c:'i',pct:'39% · superior',h:'Descansar',tot:'52,85 m²',li:[['Suíte master + closet','14,17'],['Banho master','4,31'],['Suíte 02','12,13'],['Suíte 03','9,62'],['Banhos 02 e 03','6,98'],['Hall e varanda','5,64']]},
+   {c:'g',pct:'23%',h:'Apoio',tot:'30,42 m²',li:[['Garagem 2 carros','25,72'],['Serviço','2,97'],['Despensa','1,73']]}]},
+  zText:'Social no térreo, aberto para o quintal. Suítes no andar de cima, com privacidade total.',
+  plans:[{n:'Térreo',f:'img/jatoba-planta-terreo.jpg'},{n:'Superior',f:'img/jatoba-planta-superior.jpg'}],
+  prices:[690,890],prazo:9,
+  pdf:'book/Book_Casa_Jatoba_135_Bambu_Casas.pdf',
+  other:'casa-ipe',
+  gallery:[
+   {f:'jatoba-fachada',ch:'Arquitetura',t:'Casa Jatobá',d:'Dois pavimentos, madeira, pedra e vidro.',s:'jatoba-01-fachada'},
+   {f:'jatoba-fachada-lateral',ch:'Arquitetura',t:'A suíte em balanço',d:'O volume da suíte master revestido em madeira, com varanda em vidro.',s:'jatoba-01-fachada'},
+   {f:'jatoba-fachada-frontal',ch:'Arquitetura',t:'Fachada frontal',d:'Garagem para dois carros e jardim na entrada.',s:'jatoba-01-fachada'},
+   {f:'jatoba-posterior',ch:'Arquitetura',t:'Fachada posterior',d:'A sala se abre inteira para o jardim.',s:'jatoba-06-quintal'},
+   {f:'jatoba-planta-terreo',ch:'Plantas',t:'Térreo: viver e receber',d:'Estar, jantar e cozinha gourmet em um só ambiente.',c:1},
+   {f:'jatoba-planta-superior',ch:'Plantas',t:'Superior: três suítes',d:'Todas com banheiro privativo, ligadas por um hall reservado.',c:1},
+   {f:'jatoba-sala',ch:'Interiores',t:'Sala de estar',d:'A escada como peça de arquitetura.',s:'jatoba-03-estar-escada'},
+   {f:'jatoba-cozinha-jantar',ch:'Interiores',t:'Cozinha e jantar',d:'Integrados e abertos para o quintal.',s:'jatoba-04-estar-jantar'},
+   {f:'jatoba-gourmet',ch:'Interiores',t:'Cozinha gourmet',d:'O centro da casa é a mesa.',s:'jatoba-05-cozinha-gourmet'},
+   {f:'jatoba-suite-master',ch:'Interiores',t:'Suíte master',d:'Com closet e varanda, longe do movimento da casa.'},
+   {f:'jatoba-suite',ch:'Interiores',t:'Suítes 02 e 03',d:'Uma suíte para cada um.'}],
+  floors:[{n:'Térreo',f:'img/jatoba-planta-terreo.jpg'},{n:'Superior',f:'img/jatoba-planta-superior.jpg'}],
+  scenes:[
+   {id:'jatoba-01-fachada',t:'Fachada',fl:0,x:4,y:65,yaw:0,hfov:70,h:[['jatoba-02-sala',2,-1,'Entrar na casa']]},
+   {id:'jatoba-02-sala',t:'Sala de estar',fl:0,x:51,y:68,yaw:0,h:[['jatoba-05-cozinha-gourmet',5,-5,'Cozinha gourmet'],['jatoba-04-estar-jantar',-25,-9,'Estar e jantar'],['jatoba-03-estar-escada',-70,-10,'Estar e escada'],['jatoba-01-fachada',130,-6,'Garagem e fachada']]},
+   {id:'jatoba-03-estar-escada',t:'Estar e escada',fl:0,x:43,y:55,yaw:0,h:[['jatoba-05-cozinha-gourmet',55,-6,'Cozinha gourmet'],['jatoba-04-estar-jantar',-10,-8,'Estar e jantar'],['jatoba-02-sala',-100,-12,'Sala de estar']]},
+   {id:'jatoba-04-estar-jantar',t:'Estar e jantar',fl:0,x:51,y:47.5,yaw:0,h:[['jatoba-05-cozinha-gourmet',20,-6,'Cozinha gourmet'],['jatoba-03-estar-escada',-60,-10,'Estar e escada'],['jatoba-02-sala',-125,-10,'Sala de estar']]},
+   {id:'jatoba-05-cozinha-gourmet',t:'Cozinha gourmet',fl:0,x:72,y:50,yaw:0,h:[['jatoba-06-quintal',95,-5,'Quintal'],['jatoba-04-estar-jantar',-35,-8,'Estar e jantar'],['jatoba-02-sala',-52,-3,'Sala de estar']]},
+   {id:'jatoba-06-quintal',t:'Quintal',fl:0,x:89.5,y:58,yaw:-5,h:[['jatoba-05-cozinha-gourmet',-6,-4,'Cozinha gourmet']]}]}
+};
+const SOON={name:'Casa Cumaru',area:110,img:'img/cumaru-fachada.jpg',meta:'Térrea · pedra, madeira e vidro · em breve na Coleção Bambu Casas'};
+
+const $=id=>document.getElementById(id);
+const toast=m=>{const t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),2600)};
+/* ícones nos placeholders do HTML estático já foram resolvidos no build */
+
+/* ---------- roteamento ---------- */
+let curHouse=null;
+function route(){
+  let h=(location.hash||'#inicio').slice(1); if(!['inicio','como','casas','casa-ipe','casa-jatoba'].includes(h)) h='inicio';
+  document.body.dataset.view=h;
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
+  closeMenu(); gClose(true); tClose(true); if(window.vClose) vClose();
+  if(h.startsWith('casa-')){ renderHouse(h); $('v-casa').classList.add('on'); }
+  else $('v-'+h).classList.add('on');
+  const mv=$('mVal'); if(mv){ mv.style.display=h.startsWith('casa-')?'':'none'; mv.onclick=()=>{closeMenu();vOpen();}; }
+  document.querySelectorAll('.top .crumbs button').forEach(b=>b.classList.toggle('cur',b.dataset.go===h||(h.startsWith('casa-')&&b.dataset.go==='casas')));
+  window.scrollTo(0,0); onScroll(); parallax();
+  if(h==='inicio') kbStart(); else kbStop();
+  setTimeout(()=>initMotion(document),30);
+}
+const NAMES={inicio:'Bambu Casas',como:'Como consigo ter uma casa?',casas:'Qual é a minha casa?','casa-ipe':'Casa Ipê','casa-jatoba':'Casa Jatobá'};
+let curtainBusy=false;
+function go(h){ const doNav=()=>{ if(location.hash==='#'+h) route(); else location.hash=h; };
+  if(RM||curtainBusy||document.body.dataset.view===h){ doNav(); return; }
+  curtainBusy=true; const c=$('curtain'); $('cw').innerHTML=NAMES[h]||''; c.className='cover';
+  setTimeout(()=>{ doNav(); setTimeout(()=>{ c.className='reveal'; setTimeout(()=>{ c.className=''; curtainBusy=false; },750); },120); },560); }
+document.addEventListener('click',e=>{const b=e.target.closest('[data-go]'); if(b){e.preventDefault(); go(b.dataset.go);} });
+addEventListener('hashchange',route);
+
+/* topo: escuro sobre hero, claro ao rolar */
+function onScroll(){ const v=document.body.dataset.view, t=$('top');
+  const heroDark=(v==='como')||v.startsWith('casa-'); const over=heroDark && scrollY<innerHeight*0.8;
+  t.classList.toggle('on-dark',over); t.classList.toggle('solid',!over); }
+addEventListener('scroll',onScroll,{passive:true});
+
+/* menu */
+const closeMenu=()=>document.body.classList.remove('menu-open');
+$('mbtn').onclick=()=>document.body.classList.toggle('menu-open');
+
+/* ---------- início: slideshow ---------- */
+const KB=[{f:'img/ipe-fachada.jpg',n:'Casa Ipê · 85 m²'},{f:'img/jatoba-fachada.jpg',n:'Casa Jatobá · 135 m²'},{f:'img/jatoba-posterior.jpg',n:'Casa Jatobá · fachada posterior'},{f:'img/ipe-gourmet.jpg',n:'Casa Ipê · área gourmet'}];
+let kbI=0,kbT=null;
+(function(){ const k=$('kb'),d=$('kbDots'); KB.forEach((s,i)=>{ const el=document.createElement('div'); el.className='s'; el.style.backgroundImage=`url(${s.f})`; k.appendChild(el); const b=document.createElement('button'); b.onclick=()=>{kbShow(i);kbStart()}; d.appendChild(b); }); })();
+function kbShow(i){ const bar=$('kbbar'); bar.classList.remove('run'); void bar.offsetWidth; bar.style.animationDuration='6500ms'; bar.classList.add('run'); kbI=(i+KB.length)%KB.length; [...$('kb').children].forEach((s,j)=>s.classList.toggle('on',j===kbI)); [...$('kbDots').children].forEach((s,j)=>s.classList.toggle('on',j===kbI)); $('kbName').querySelector('span').textContent=KB[kbI].n; }
+function kbStart(){ kbStop(); kbShow(kbI); kbT=setInterval(()=>kbShow(kbI+1),6500); }
+function kbStop(){ clearInterval(kbT); }
+
+/* ---------- casas (índice) ---------- */
+const CX=[
+ {id:'casa-ipe',n:'01',nm:'Ipê',area:85,img:'img/ipe-fachada.jpg',tags:['Térrea','2 quartos, 1 suíte com closet','Área gourmet'],pr:'R$ 360 mil',cap:'Térrea, compacta e com área gourmet'},
+ {id:'casa-jatoba',n:'02',nm:'Jatobá',area:135,img:'img/jatoba-fachada.jpg',tags:['2 pavimentos','3 suítes','Garagem para 2 carros'],pr:'R$ 690 mil',cap:'Dois pavimentos e três suítes'},
+ {id:'cumaru',n:'03',nm:'Cumaru',area:110,img:'img/cumaru-fachada.jpg',tags:['Térrea','Pedra, madeira e vidro','Em breve'],pr:'Em breve',cap:'Prévia · lançamento em breve',soon:1}];
+let cxCur=0;
+(function(){ const L=$('cxList'), S=$('cxStage');
+  L.innerHTML=CX.map((c,i)=>`<li class="cx-row ${c.soon?'soon':''}" data-i="${i}" ${c.soon?'':`data-go="${c.id}"`}><div class="mimg" style="background-image:url(${c.img})"></div><span class="n">${c.n}</span><span class="nm"><i></i>${c.nm}<sup>${c.area} m²</sup></span><span class="pr"><small>${c.soon?'':'a partir de'}</small>${c.pr}</span><span class="tags">${c.tags.map(x=>`<span>${x}</span>`).join('')}</span></li>`).join('');
+  S.insertAdjacentHTML('afterbegin',CX.map((c,i)=>`<div class="ci ${i?'':'on'}" style="background-image:url(${c.img});${c.soon?'background-position:50% 65%':''}"></div>`).join(''));
+  const cap=()=>{ const c=CX[cxCur]; $('cxCap').innerHTML=`<div><b>Casa ${c.nm} · ${c.area} m²</b><small>${c.cap}</small></div>${c.soon?`<a class="go" href="${WA.soon}" target="_blank" rel="noopener" title="Quero ser avisado">${ic('chat')}</a>`:`<button class="go" data-go="${c.id}">${ARR}</button>`}`; };
+  window.cxShow=i=>{ cxCur=i; S.querySelectorAll('.ci').forEach((x,j)=>x.classList.toggle('on',j===i)); cap(); };
+  cap();
+  L.querySelectorAll('.cx-row').forEach(r=>{ r.addEventListener('mouseenter',()=>cxShow(+r.dataset.i)); r.addEventListener('focus',()=>cxShow(+r.dataset.i)); });
+  L.querySelector('.cx-row.soon').addEventListener('click',()=>window.open(WA.soon,'_blank'));
+  document.querySelectorAll('.who button').forEach(b=>b.onclick=()=>{ const on=!b.classList.contains('on'); document.querySelectorAll('.who button').forEach(x=>x.classList.remove('on')); L.classList.toggle('dim',on); L.querySelectorAll('.cx-row').forEach(r=>r.classList.remove('hot'));
+    if(on){ b.classList.add('on'); const i=CX.findIndex(c=>c.id===b.dataset.who); const r=L.children[i]; r.classList.add('hot'); cxShow(i); if(innerWidth<=900) r.scrollIntoView({behavior:'smooth',block:'center'}); } });
+  const cur=$('cxCur'); L.addEventListener('mousemove',e=>{ cur.style.left=e.clientX+'px'; cur.style.top=e.clientY+'px'; const r=e.target.closest('.cx-row'); cur.textContent=r&&r.classList.contains('soon')?'Quero ser avisado':'Ver casa'; cur.classList.toggle('on',!!r); });
+  L.addEventListener('mouseleave',()=>cur.classList.remove('on'));
+})();
+/* ---------- página da casa ---------- */
+function renderHouse(id){ curHouse=id; const h=HOUSES[id], o=HOUSES[h.other];
+  const zones=h.zones.z.map(z=>`<div class="zone ${z.c}"><span class="pct">${z.pct}</span><h3>${z.h}</h3><span class="tot">${z.tot}</span><ul>${z.li.map(l=>`<li class="${l[2]?'hl':''}">${l[0]}<span>${l[1]}</span></li>`).join('')}</ul></div>`).join('');
+  const tabs=h.plans.length>1?`<div class="tabs">${h.plans.map((p,i)=>`<button class="${i?'':'on'}" data-plan="${i}">${p.n}</button>`).join('')}</div>`:'';
+  $('v-casa').innerHTML=`
+  <div class="h-hero"><div class="bg" style="background-image:url(${h.hero})"></div>
+    <div class="hin"><span class="k">${h.k}</span><h1>${h.name}</h1><p class="meta">${h.meta}</p>
+      <div class="acts"><button class="btn neon" data-act="tour">${ic('pano')}Passeio virtual 360°</button><button class="btn glass" data-act="gal">${ic('grid')}Ver as imagens</button><button class="btn glass" data-act="plan">${ic('plan')}Planta</button><button class="btn glass" data-act="val">${ic('tag')}Quanto custa?</button><a class="btn glass" href="${h.pdf}" download>${ic('down')}Baixar o book (PDF)</a></div></div></div>
+  <div class="sec"><div class="wrap split"><div><span class="label"><i></i>A casa</span><h2 style="margin-top:18px">${h.intro.t}</h2><p class="lead" style="margin-top:20px">${h.intro.p}</p><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:28px"><button class="btn ink" data-act="gal">${ic('grid')}Ver as imagens</button><button class="btn line" data-act="tour">${ic('pano')}Passear em 360°</button></div></div><div class="ph" style="background-image:url(${h.intro.img})"></div></div></div>
+  <div class="sec dark"><div class="darc" style="left:-12vw;bottom:-28vw;width:48vw;height:48vw"></div><div class="darc b" style="left:-4vw;bottom:-34vw;width:48vw;height:48vw"></div><div class="wrap" style="position:relative">
+    <div class="two" style="align-items:end"><div><span class="label"><i></i>Programa</span><h2 style="margin-top:18px">Uma casa, <em>três zonas.</em></h2><p class="lead" style="margin-top:16px;max-width:460px">${h.zText}</p></div><div class="area-big" style="justify-self:end">${h.area}<span>m²</span></div></div>
+    <div class="zones" style="grid-template-columns:${h.zones.cols}">${zones}</div></div></div>
+  <div class="sec plans" id="plans"><div class="wrap"><span class="label"><i></i>Planta humanizada</span><h2 style="margin-top:18px">${h.plans.length>1?'Dois pavimentos, <em>tudo no lugar.</em>':'Tudo no térreo, <em>sem desperdício.</em>'}</h2>${tabs}<div class="pimg" id="pimg"><img src="${h.plans[0].f}" alt="Planta ${h.name}"></div></div></div>
+  <div class="sec" style="background:var(--mist)"><div class="wrap"><span class="label"><i></i>Investimento</span><h2 style="margin-top:18px">Dois caminhos para a <em>mesma casa.</em></h2>
+    <div class="inv">
+      <div class="formula"><div class="fx"><div class="chip neon">${ic('hand')}</div><div><b>Entrada facilitada</b><small>Negociada diretamente com a construtora</small></div></div><div class="op">+</div><div class="fx"><div class="chip" style="background:var(--paper)">${ic('bank')}</div><div><b>Restante financiado pela Caixa</b><small>Em até 35 anos, com possibilidade de usar o FGTS</small></div></div><div class="op">=</div><div class="fx dk"><div class="chip">${ic('key')}</div><div><b>${h.name}, pronta em ${h.prazo} meses</b><small>Com a Bambu Casas guiando cada etapa</small></div></div></div>
+      <div class="pc"><span class="label">Valor da construção</span><div class="for">Para quem já possui o terreno</div><div class="val"><small>R$</small><b>${h.prices[0]}</b><i>mil</i></div><ul><li><i></i>Pronta em ${h.prazo} meses</li><li><i></i>O terreno pode compor a entrada</li><li><i></i>Financiamento Caixa</li></ul></div>
+      <div class="pc full"><span class="label">Construção + terreno</span><div class="for">Imóvel completo, com o terreno incluso</div><div class="val"><small>R$</small><b>${h.prices[1]}</b><i>mil</i></div><ul><li><i></i>Pronta em ${h.prazo} meses</li><li><i></i>Terreno no Bougainville, Belém</li><li><i></i>Entrada facilitada</li></ul></div>
+    </div>
+    <div class="bridge"><div><b>Como funciona a compra?</b><p>Financiamento, entrada facilitada, passo a passo e quem constrói.</p></div><button class="btn neon" data-go="como">Entender o modelo ${ARR}</button></div>
+    <p class="legal" style="margin-top:14px">Condições sujeitas à análise de crédito da Caixa. Valores sujeitos a alterações conforme o Memorial Descritivo. Tabela válida até dezembro de 2026.</p></div></div>
+  <div class="sec dark"><div class="darc" style="right:-16vw;top:-22vw;width:56vw;height:56vw"></div><div class="wrap other" style="position:relative"><div class="ph" style="background-image:url(${o.hero})"></div><div><span class="label"><i></i>Conheça também</span><h2 style="margin-top:18px;font-size:clamp(48px,6vw,96px)">${o.name}<span style="font-family:var(--sans);font-size:20px;color:var(--neon);vertical-align:top;margin-left:10px">${o.area} m²</span></h2><p class="lead" style="margin-top:14px">${o.meta.replace(/<b>.*?<\/b> · /,'')}</p><button class="btn neon" style="margin-top:28px" data-go="${h.other}">Ver a ${o.name} ${ARR}</button></div></div></div>
+  <div class="sec dark" style="border-top:1px solid #2a2d28"><div class="darc" style="right:-16vw;top:-22vw;width:56vw;height:56vw"></div><div class="darc b" style="right:-24vw;top:-14vw;width:56vw;height:56vw"></div><div class="wrap cta" style="position:relative">
+    <div><span class="label"><i></i>Próximo passo</span><h2 style="margin-top:18px">Vamos simular <em>a sua casa?</em></h2><p class="lead" style="margin-top:20px;max-width:520px">A simulação é gratuita. Em poucos minutos você descobre quanto pode financiar e como fica a entrada.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:30px"><a class="btn neon" href="${WA[h.key]}" target="_blank" rel="noopener">${ic('chat')}Simular no WhatsApp</a><a class="btn line" href="${h.pdf}" download>${ic('down')}Baixar o book</a></div>
+      <div class="contacts"><div><span>WhatsApp</span><b><a href="${WA[h.key]}" target="_blank" rel="noopener">(91) 98024-5432</a></b></div><div><span>Instagram</span><b>@bambucasas_</b></div></div></div>
+    <a class="qrcard" href="${WA[h.key]}" target="_blank" rel="noopener">${QR[h.key]}<div class="cap"><div class="chip">${ic('chat')}</div><div><b>Aponte a câmera</b><small>e fale com a gente no WhatsApp</small></div></div></a></div></div>
+  <footer class="dark"><div class="wrap"><p class="legal">Bambu Casas · CNPJ 47.664.754/0001-00 · Imagens meramente ilustrativas · Móveis e decoração não inclusos · Tabela válida até dezembro de 2026</p></div></footer>`;
+  $('v-casa').querySelectorAll('[data-act]').forEach(b=>b.onclick=()=>{ const a=b.dataset.act; if(a==='tour') tOpen(); else if(a==='gal') gOpen(0); else if(a==='val') vOpen(); else document.getElementById('plans').scrollIntoView({behavior:'smooth'}); });
+  $('v-casa').querySelectorAll('[data-plan]').forEach(b=>b.onclick=()=>{ $('v-casa').querySelectorAll('[data-plan]').forEach(x=>x.classList.remove('on')); b.classList.add('on'); $('pimg').querySelector('img').src=h.plans[+b.dataset.plan].f; });
+  $('pimg').onclick=()=>{ $('lb').querySelector('img').src=$('pimg').querySelector('img').src; $('lb').classList.add('open'); };
+}
+$('lbClose').onclick=()=>$('lb').classList.remove('open');
+$('lb').onclick=e=>{ if(e.target.id==='lb') $('lb').classList.remove('open'); };
+
+/* ---------- galeria ---------- */
+let gi=0,gPlay=false,gT=null; const G_MS=6000;
+function gData(){ return HOUSES[curHouse].gallery; }
+function gBuild(){ const G=gData(), h=HOUSES[curHouse];
+  $('gHouse').textContent=h.name+' · '+h.area+' m²';
+  $('gSl').innerHTML=G.map(p=>`<div class="s ${p.c?'contain':''}"><div class="im" data-bg="img/${p.f}.jpg"></div></div>`).join('');
+  let last='',gh='';
+  G.forEach((p,i)=>{ if(p.ch!==last){ gh+=`<div class="ch">${p.ch}</div>`; last=p.ch; } gh+=`<button data-i="${i}"><div class="t" style="background-image:url(imgthumb/${p.f}.jpg)"></div><small>${p.t}</small></button>`; });
+  $('gGrid').innerHTML=gh; $('gGrid').querySelectorAll('button').forEach(b=>b.onclick=()=>{ $('gIndex').classList.remove('open'); gShow(+b.dataset.i); });
+}
+function lazy(i){ const s=$('gSl').children[i]; if(!s) return; const im=s.querySelector('.im'); if(im.dataset.bg){ im.style.backgroundImage=`url(${im.dataset.bg})`; delete im.dataset.bg; } }
+function gShow(i){ const G=gData(); gi=(i+G.length)%G.length; lazy(gi); lazy(gi+1);
+  [...$('gSl').children].forEach((s,j)=>s.classList.toggle('on',j===gi));
+  const p=G[gi]; $('gChap').textContent=p.ch; $('gCount').textContent=String(gi+1).padStart(2,'0')+' / '+String(G.length).padStart(2,'0');
+  $('gCap').innerHTML=`<span class="pill"><i></i>${p.ch}</span><h2>${p.t}</h2><p>${p.d}</p>`;
+  $('gTour').style.display=p.s?'':'none';
+  [...$('gGrid').querySelectorAll('button')].forEach(b=>b.classList.toggle('cur',+b.dataset.i===gi));
+  gSched(); }
+function gSched(){ clearTimeout(gT); const pr=$('gProg'); pr.classList.remove('run'); if(!gPlay) return; void pr.offsetWidth; pr.style.animationDuration=G_MS+'ms'; pr.classList.add('run'); gT=setTimeout(()=>gShow(gi+1),G_MS); }
+function gOpen(i){ gBuild(); $('gal').classList.add('open'); gPlay=true; $('gPlay').classList.add('on'); gShow(i||0); }
+function gClose(silent){ clearTimeout(gT); gPlay=false; $('gal').classList.remove('open'); $('gIndex').classList.remove('open'); }
+$('gClose').onclick=()=>gClose(); $('gPrev').onclick=()=>{gPlay=false;$('gPlay').classList.remove('on');gShow(gi-1)}; $('gNext').onclick=()=>{gPlay=false;$('gPlay').classList.remove('on');gShow(gi+1)};
+$('gPlay').onclick=()=>{ gPlay=!gPlay; $('gPlay').classList.toggle('on',gPlay); gSched(); };
+$('gIdx').onclick=()=>{ gPlay=false; $('gPlay').classList.remove('on'); gSched(); $('gIndex').classList.add('open'); };
+$('gIdxClose').onclick=()=>$('gIndex').classList.remove('open');
+$('gTour').onclick=()=>{ const s=gData()[gi].s; gClose(); tOpen(s); };
+(function(){ let x0=null; $('gal').addEventListener('touchstart',e=>{x0=e.touches[0].clientX},{passive:true}); $('gal').addEventListener('touchend',e=>{ if(x0==null) return; const dx=e.changedTouches[0].clientX-x0; if(Math.abs(dx)>50){ gPlay=false; $('gPlay').classList.remove('on'); gShow(gi+(dx<0?1:-1)); } x0=null; }); })();
+
+/* ---------- tour 360 ---------- */
+function hsTip(div,a){ div.classList.add('hs'); div.innerHTML='<div class="hdot"><svg viewBox="0 0 24 24"><path d="M12 18V6M6.5 11.5L12 6l5.5 5.5"/></svg></div><div class="hlbl">'+a.label+'</div>'; }
+let viewer=null,viewerHouse=null,tCur=null,tFloor=0,tAuto=false,tAutoT=null;
+function sc(){ return HOUSES[curHouse].scenes; }
+function tBuild(){ const h=HOUSES[curHouse], S=sc();
+  $('tHouse').textContent=h.name+' · '+h.area+' m²';
+  $('tStrip').innerHTML=S.map(s=>`<button data-s="${s.id}"><div class="t" style="background-image:url(thumb/${s.id}.jpg)"></div><small>${s.t}</small></button>`).join('');
+  $('tStrip').querySelectorAll('button').forEach(b=>b.onclick=()=>{ tGo(b.dataset.s); $('tDrawer').classList.remove('open'); $('tAmb').classList.remove('on'); });
+  if(viewer){ try{viewer.destroy()}catch(e){} viewer=null; }
+  const byId={}; S.forEach(s=>byId[s.id]=s);
+  const cfg={}; S.forEach(s=>cfg[s.id]={type:'equirectangular',panorama:'pano/'+s.id+'.jpg',yaw:s.yaw||0,pitch:0,hfov:s.hfov||105,
+    hotSpots:(s.h||[]).map(h=>({type:'scene',sceneId:h[0],yaw:h[1],pitch:h[2],targetYaw:byId[h[0]].yaw||0,targetPitch:0,targetHfov:byId[h[0]].hfov||105,cssClass:'hs-wrap',createTooltipFunc:hsTip,createTooltipArgs:{label:h[3]}}))});
+  viewer=pannellum.viewer('pano',{default:{firstScene:S[0].id,autoLoad:true,showControls:false,compass:false,sceneFadeDuration:900,mouseZoom:true,minHfov:50,maxHfov:120},scenes:cfg});
+  viewer.on('scenechange',id=>{ tCur=id; tUI(); $('tLoad').classList.add('on'); });
+  viewer.on('load',()=>{ $('tLoad').classList.remove('on'); if(tAuto) tSched(); });
+  viewer.on('mousedown',()=>tStopAuto()); viewer.on('touchstart',()=>tStopAuto());
+  viewerHouse=curHouse; tCur=S[0].id; $('tLoad').classList.add('on'); tUI();
+}
+function tMapHTML(){ const h=HOUSES[curHouse], S=sc(), fl=h.floors[tFloor];
+  const floors=h.floors.length>1?`<div class="fl">${h.floors.map((f,i)=>`<button class="${i===tFloor?'on':''}" data-fl="${i}">${f.n}</button>`).join('')}</div>`:'';
+  const dots=S.filter(s=>s.fl===tFloor).map(s=>`<button class="dot ${s.id===tCur?'cur':''} ${s.x<15?'l':(s.x>85?'r':'')}" data-s="${s.id}" style="left:${s.x}%;top:${s.y}%"><span>${s.t}</span></button>`).join('');
+  const extra=(h.floors.length>1&&tFloor===1)?'<div class="ft">Os pontos 360° desta casa estão no térreo.</div>':'<div class="ft">Toque num ponto para ir até o ambiente.</div>';
+  return `<div class="hd" id="mapHd"><span style="display:flex;align-items:center"><span class="grip"><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="label"><i></i>Planta · ${fl.n}</span></span><span style="display:flex;gap:6px;align-items:center">${floors}<button class="mx" id="mapX" aria-label="Fechar planta"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></span></div><div class="box"><img src="${fl.f}" alt="Planta">${dots}</div>${extra}`; }
+function tUI(){ const S=sc(), s=S.find(x=>x.id===tCur)||S[0], i=S.indexOf(s);
+  $('tTitle').innerHTML=`<span class="pill"><i></i>${String(i+1).padStart(2,'0')} / ${String(S.length).padStart(2,'0')}</span><h2>${s.t}</h2>`;
+  $('tStrip').querySelectorAll('button').forEach(b=>b.classList.toggle('cur',b.dataset.s===tCur));
+  $('tMap').innerHTML=tMapHTML();
+  $('tMap').querySelectorAll('.dot').forEach(d=>d.onclick=()=>tGo(d.dataset.s));
+  $('tMap').querySelectorAll('[data-fl]').forEach(b=>b.onclick=()=>{ tFloor=+b.dataset.fl; tUI(); });
+  $('mapX').onclick=()=>{ $('tMap').classList.remove('open'); $('tMapB').classList.remove('on'); }; }
+function tGo(id){ if(!viewer||id===tCur) return; viewer.loadScene(id); }
+function tStep(d){ const S=sc(); const i=S.findIndex(s=>s.id===tCur); tGo(S[(i+d+S.length)%S.length].id); }
+function tSched(){ clearTimeout(tAutoT); try{viewer.startAutoRotate(-3)}catch(e){} tAutoT=setTimeout(()=>{ if(tAuto) tStep(1); },15000); }
+function tStartAuto(){ tAuto=true; $('tAuto').classList.add('on'); tSched(); toast('Passeio automático ligado'); }
+function tStopAuto(){ if(!tAuto) return; tAuto=false; clearTimeout(tAutoT); $('tAuto').classList.remove('on'); try{viewer.stopAutoRotate()}catch(e){} }
+function tOpen(sceneId){ $('tour').classList.add('open'); tFloor=0;
+  if(viewerHouse!==curHouse) tBuild(); else tUI();
+  if(sceneId) setTimeout(()=>tGo(sceneId),50);
+  const desk=innerWidth>900; $('tMap').classList.toggle('open',desk); $('tMapB').classList.toggle('on',desk);
+  setTimeout(()=>{ try{viewer.resize()}catch(e){} },60); }
+function tClose(silent){ tStopAuto(); $('tour').classList.remove('open'); $('tDrawer').classList.remove('open'); $('tAmb').classList.remove('on'); if(document.fullscreenElement) document.exitFullscreen().catch(()=>{}); }
+$('tClose').onclick=()=>tClose(); $('tPrev').onclick=()=>{tStopAuto();tStep(-1)}; $('tNext').onclick=()=>{tStopAuto();tStep(1)};
+$('tAuto').onclick=()=>tAuto?tStopAuto():tStartAuto();
+$('tAmb').onclick=()=>{ const o=!$('tDrawer').classList.contains('open'); $('tDrawer').classList.toggle('open',o); $('tAmb').classList.toggle('on',o); if(o){ $('tMap').classList.remove('open'); $('tMapB').classList.remove('on'); } };
+$('tMapB').onclick=()=>{ const o=!$('tMap').classList.contains('open'); $('tMap').classList.toggle('open',o); $('tMapB').classList.toggle('on',o); if(o){ $('tDrawer').classList.remove('open'); $('tAmb').classList.remove('on'); } };
+$('tFs').onclick=()=>{ const el=$('tour'); try{ if(document.fullscreenElement) document.exitFullscreen(); else (el.requestFullscreen||el.webkitRequestFullscreen).call(el); }catch(e){ toast('Tela cheia indisponível aqui'); } };
+
+document.querySelectorAll('[data-home]').forEach(b=>b.onclick=()=>{ gClose(); tClose(); go('inicio'); });
+
+
+/* ---------- valores ---------- */
+function vOpen(){ const h=HOUSES[curHouse]; if(!h) return;
+  $('valSheet').innerHTML=`<div class="vh"><div><span class="label"><i></i>Quanto custa · ${h.name} ${h.area} m²</span><h2>Dois caminhos para a <em>mesma casa.</em></h2></div><button class="cb" id="vClose" aria-label="Fechar">${ic('x')}</button></div>
+  <div class="vgrid">
+    <div class="formula"><div class="fx"><div class="chip neon">${ic('hand')}</div><div><b>Entrada facilitada</b><small>Negociada diretamente com a construtora</small></div></div><div class="op">+</div><div class="fx"><div class="chip" style="background:var(--paper)">${ic('bank')}</div><div><b>Restante financiado pela Caixa</b><small>Em até 35 anos, com possibilidade de usar o FGTS</small></div></div><div class="op">=</div><div class="fx dk"><div class="chip">${ic('key')}</div><div><b>${h.name}, pronta em ${h.prazo} meses</b><small>Com a Bambu Casas guiando cada etapa</small></div></div></div>
+    <div class="pc"><span class="label">Valor da construção</span><div class="for">Para quem já possui o terreno</div><div class="val"><small>R$</small><b>${h.prices[0]}</b><i>mil</i></div><ul><li><i></i>Pronta em ${h.prazo} meses</li><li><i></i>O terreno pode compor a entrada</li><li><i></i>Financiamento Caixa</li></ul></div>
+    <div class="pc full"><span class="label">Construção + terreno</span><div class="for">Imóvel completo, com o terreno incluso</div><div class="val"><small>R$</small><b>${h.prices[1]}</b><i>mil</i></div><ul><li><i></i>Pronta em ${h.prazo} meses</li><li><i></i>Terreno no Bougainville, Belém</li><li><i></i>Entrada facilitada</li></ul></div>
+  </div>
+  <div class="vcta"><a class="qr" href="${WA[h.key]}" target="_blank" rel="noopener">${QR[h.key]}</a><div><b>Quer saber como fica no seu caso?</b><p>Aponte a câmera para o QR code ou fale agora com a gente. A simulação é gratuita.</p><div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn neon" href="${WA[h.key]}" target="_blank" rel="noopener">${ic('chat')}Falar no WhatsApp</a><a class="btn line" style="color:#F1F2EC;border-color:#4a4d47" href="${h.pdf}" download>${ic('down')}Baixar o book</a></div><p class="legal" style="color:#7c8077;margin:14px 0 0">(91) 98024-5432 · @bambucasas_</p></div></div>
+  <p class="legal">Condições sujeitas à análise de crédito da Caixa. Valores sujeitos a alterações conforme o Memorial Descritivo. Tabela válida até dezembro de 2026.</p>`;
+  $('vClose').onclick=vClose; $('val').classList.add('open');
+  if(!RM){ $('valSheet').querySelectorAll('.pc .val b').forEach(b=>{ b.dataset.count=b.textContent; countUp(b); }); } }
+function vClose(){ $('val').classList.remove('open'); }
+$('val').addEventListener('click',e=>{ if(e.target.id==='val') vClose(); });
+document.querySelectorAll('[data-val]').forEach(b=>b.onclick=()=>{ if($('tour').classList.contains('open')) tStopAuto(); gPlay=false; vOpen(); });
+
+/* planta arrastável */
+(function(){ const m=$('tMap'); let st=null;
+  m.addEventListener('pointerdown',e=>{ if(!e.target.closest('#mapHd')||e.target.closest('button')) return; const r=m.getBoundingClientRect(), pr=$('tour').getBoundingClientRect();
+    st={x:e.clientX,y:e.clientY,l:r.left-pr.left,t:r.top-pr.top,w:r.width,h:r.height,pw:pr.width,ph:pr.height}; m.classList.add('drag'); m.setPointerCapture(e.pointerId); e.preventDefault(); });
+  m.addEventListener('pointermove',e=>{ if(!st) return; const l=Math.max(8,Math.min(st.pw-st.w-8,st.l+e.clientX-st.x)), tp=Math.max(8,Math.min(st.ph-st.h-8,st.t+e.clientY-st.y));
+    m.style.left=l+'px'; m.style.top=tp+'px'; m.style.right='auto'; m.style.bottom='auto'; });
+  const end=()=>{ if(!st) return; st=null; m.classList.remove('drag'); }; m.addEventListener('pointerup',end); m.addEventListener('pointercancel',end);
+})();
+/* teclado */
+addEventListener('keydown',e=>{ if($('gal').classList.contains('open')){ if(e.key==='ArrowRight') $('gNext').click(); if(e.key==='ArrowLeft') $('gPrev').click(); if(e.key==='Escape') gClose(); }
+  else if($('tour').classList.contains('open')){ if(e.key==='ArrowRight') $('tNext').click(); if(e.key==='ArrowLeft') $('tPrev').click(); if(e.key==='Escape') tClose(); }
+  else if(e.key==='Escape'){ vClose(); closeMenu(); $('lb').classList.remove('open'); } });
+
+
+/* ================= MOTION ================= */
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function splitWords(el){ if(el.dataset.split) return; el.dataset.split=1; let i=0;
+  const walk=n=>{ [...n.childNodes].forEach(c=>{ if(c.nodeType===3){ const parts=c.textContent.split(/(\s+)/); const f=document.createDocumentFragment();
+      parts.forEach(p=>{ if(!p) return; if(/^\s+$/.test(p)){ f.appendChild(document.createTextNode(p)); return; } const w=document.createElement('span'); w.className='sw'; const s=document.createElement('span'); s.textContent=p; s.style.setProperty('--i',i++); w.appendChild(s); f.appendChild(w); });
+      c.replaceWith(f); } else if(c.nodeType===1 && c.tagName!=='BR' && c.tagName!=='SPAN') walk(c); }); };
+  walk(el); el.classList.add('spl'); }
+let io=null;
+function initMotion(root){ if(RM) return; root=root||document;
+  if(!io) io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); if(e.target.dataset.count&&!e.target.dataset.done){ e.target.dataset.done=1; countUp(e.target);} io.unobserve(e.target); } }),{rootMargin:'0px 0px -10% 0px',threshold:.12});
+  root.querySelectorAll('.view h2, .view .h-hero h1, .view .hero2 h1').forEach(h=>{ splitWords(h); io.observe(h); });
+  const groups=['.cx-row','.who','.label','.lead','.view p:not(.legal)','.fcard','.vs .col','.tile','.nlist .it','.slist div','.team>div','.obras>div','.hcard','.fx','.op','.pc','.bridge','.contacts','.qrcard','.forms','.notes','.endorse','.plans .pimg','.plans .tabs','.h-hero .meta','.h-hero .acts','.h-hero .k','.area-big','.vs .mid'];
+  root.querySelectorAll(groups.join(',')).forEach(el=>{ if(!el.closest('.view')||el.closest('.spl')||el.classList.contains('rv')||el.closest('#v-inicio')) return; const sib=[...el.parentElement.children].filter(x=>x.matches(groups.join(','))); el.style.setProperty('--d',(Math.min(sib.indexOf(el),8)*0.08)+'s'); el.classList.add('rv'); io.observe(el); });
+  root.querySelectorAll('.view .ph, .split .ph, .other .ph, .struct .ph').forEach(el=>{ if(el.classList.contains('rv-img')) return; el.classList.add('rv-img'); io.observe(el); });
+  root.querySelectorAll('.zone, .why div').forEach((el,i)=>{ el.style.setProperty('--d',(i%4)*0.15+'s'); io.observe(el); });
+  root.querySelectorAll('.steps').forEach(el=>io.observe(el));
+  root.querySelectorAll('.step').forEach((el,i)=>{ el.style.setProperty('--d',(0.3+i*0.18)+'s'); io.observe(el); });
+  root.querySelectorAll('.area-big, .pc .val b, .zone .tot').forEach(el=>{ if(el.dataset.count) return; const m=el.firstChild&&el.firstChild.nodeType===3?el.firstChild.textContent.match(/[\d.,]+/):null; if(!m) return; el.dataset.count=m[0]; io.observe(el); });
+}
+function countUp(el){ const raw=el.dataset.count, dec=(raw.split(',')[1]||'').length, target=parseFloat(raw.replace(/\./g,'').replace(',','.')); const node=el.firstChild; const suffix=node.textContent.slice(node.textContent.indexOf(raw)+raw.length), prefix=node.textContent.slice(0,node.textContent.indexOf(raw));
+  const t0=performance.now(), D=1400; const step=now=>{ const k=Math.min(1,(now-t0)/D), e=1-Math.pow(1-k,4); node.textContent=prefix+(target*e).toFixed(dec).replace('.',',')+suffix; if(k<1) requestAnimationFrame(step); }; requestAnimationFrame(step); }
+/* parallax leve nas imagens */
+let pxTick=false;
+function parallax(){ pxTick=false; if(RM) return; const vh=innerHeight;
+  document.querySelectorAll('.view.on .rv:not(.in), .view.on .rv-img:not(.in), .view.on .spl:not(.in), .view.on .zone:not(.in), .view.on .step:not(.in), .view.on .steps:not(.in)').forEach(el=>{ const r=el.getBoundingClientRect(); if(r.top<vh*0.92&&r.bottom>0){ el.classList.add('in'); if(el.dataset.count&&!el.dataset.done){ el.dataset.done=1; countUp(el);} } });
+  document.querySelectorAll('.view.on .ph, .view.on .h-hero .bg').forEach(el=>{ const r=el.getBoundingClientRect(); if(r.bottom<0||r.top>vh) return; const c=(r.top+r.height/2-vh/2)/vh;
+    if(el.classList.contains('bg')) el.style.transform=`translateY(${Math.max(0,-r.top)*0.25}px) scale(1.04)`; else el.style.backgroundPositionY=`calc(50% + ${c*-40}px)`; });
+  const h=document.documentElement; $('prog').style.width=(scrollY/(h.scrollHeight-innerHeight||1)*100)+'%'; }
+addEventListener('scroll',()=>{ if(!pxTick){ pxTick=true; requestAnimationFrame(parallax); } },{passive:true});
+/* botões magnéticos */
+if(matchMedia('(hover:hover) and (pointer:fine)').matches && !RM){
+  document.addEventListener('mousemove',e=>{ const b=e.target.closest('.btn,.door,.mbtn,.hcard .go'); document.querySelectorAll('.mag').forEach(x=>{ if(x!==b){ x.style.transform=''; x.classList.remove('mag'); } });
+    if(!b) return; const r=b.getBoundingClientRect(); const dx=(e.clientX-r.left-r.width/2)/r.width, dy=(e.clientY-r.top-r.height/2)/r.height; b.classList.add('mag'); b.style.transform=`translate(${dx*8}px,${dy*6}px)`; });
+}
+/* marquee */
+(function(){ const n=['Casa Ipê <em>85 m²</em>','Casa Jatobá <em>135 m²</em>','Casa Cumaru <em>110 m²</em>','Coleção <em>Bambu Casas</em>']; const h=n.map(x=>`<span>${x}</span>`).join(''); const m=$('marq'); if(m) m.innerHTML=h+h; })();
+/* intro */
+addEventListener('load',()=>setTimeout(()=>document.body.classList.remove('intro'),150));
+
+route();
+</script>
+</body>
+</html>
